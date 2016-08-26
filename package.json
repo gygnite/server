@@ -1,0 +1,39 @@
+{
+  "name": "gygnite_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gygnite/server.git"
+  },
+  "author": "Michael Hottman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gygnite/server/issues"
+  },
+  "homepage": "https://github.com/gygnite/server#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "bluebird": "^3.4.3",
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.0",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "express-jwt": "^3.4.0",
+    "http": "0.0.0",
+    "joi": "^9.0.4",
+    "jsonwebtoken": "^7.1.9",
+    "mongodb": "^2.2.8",
+    "mongoose": "^4.5.10",
+    "morgan": "^1.7.0",
+    "socket.io": "^1.4.8"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
+  }
+}
