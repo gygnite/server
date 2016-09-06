@@ -5,6 +5,7 @@ const errors = require('../errors/builder');
 const expressJWT = require('express-jwt');
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
+const emailer = require('../emailer');
 
 const User = require('../db/User.model');
 
@@ -14,7 +15,7 @@ const loginSchema = Joi.object().keys({
     password: validPassword
 });
 const signupSchema = Joi.object().keys({
-    email: Joi.string().email().required().label('Email'),
+    email: Joi.string().email().required().regex(/^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$/igm).label('Email'),
     password: validPassword,
     first_name: Joi.string().required(),
     last_name: Joi.string().required()
@@ -60,6 +61,7 @@ router.post('/login', function(req, res) {
                             return errors.authorization.invalidCredentials(res);
                         } else {
                             var currUser = User.findOne({email: validated.email}, function(err, existing) {
+
                                 var token = jwt.sign(existing, process.env.JWT_SECRET);
                                 return res.json({
                                     user: existing,
@@ -69,12 +71,14 @@ router.post('/login', function(req, res) {
                         }
                     });
                 } else {
-                    //user doesn't exists, throw invalid credentials
+                    //user doesn't exist, throw invalid credentials
                     return errors.authorization.invalidCredentials(res);
                 }
             });
         }
     });
+
+
 });
 
 
@@ -99,6 +103,19 @@ router.post('/signup', function(req, res) {
                                 last_name: value.last_name || '',
                             });
                             newuser.save();
+
+                            // console.log("newuser: ", newuser.activation_code);
+
+                            //send registration email
+                            emailer.send('account_activation', {
+                                to: value.email,
+                                subject: 'Welcome to Gygnite!',
+                                mergeable: {
+                                    first_name: value.first_name,
+                                    activation_code: newuser.activation_code
+                                }
+                            });
+
                             return res.json({
                                 success: true,
                                 message: 'Account created'
@@ -117,6 +134,25 @@ router.post('/signup', function(req, res) {
     });
 });
 
+
+
+router.post('/register/:code', function(req, res) {
+    if (!req.params.code) {
+        //invalid code
+        res.json({
+            invalid: 'activation code',
+            fixme: true
+        });
+    }
+
+    User.findOne({activation_code: req.params.code}).then(function(user) {
+        console.log("user found!", user);
+        res.json({
+            user: user
+        });
+    });
+
+});
 
 
 
