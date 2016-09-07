@@ -11,7 +11,7 @@ exports.up = function(knex, Promise) {
         table.text('bio');
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('updated_at').defaultTo(knex.fn.now());
-        table.timestamp('deleted_at').defaultTo(knex.fn.now());
+        table.timestamp('deleted_at').defaultTo();
     });
 };
 

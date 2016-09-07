@@ -1,28 +1,48 @@
 'use strict';
-const db = require('./mongoose.config');
-const randomstring = require('randomstring');
 
-const UserSchema = db.Schema({
-    email: {
-        type: String,
-        unique: true,
-        required: true
-    },
-    password: {type: String, select: false},
-    first_name: String,
-    last_name: String,
-    created_at: {type: Date, default: Date.now},
-    deleted_at: {type: Date, default: null},
-    activation_code: {type: String, default: randomstring.generate()}
-});
+const knex = require('./knex');
+const Promise = require('bluebird');
 
-UserSchema.methods.getUser = function() {
-    console.log("user data method: ", this);
-    return this;
+
+function User() {
+    return knex('users');
+}
+
+
+function UserModel() {};
+
+
+function findOne(email) {
+    return new Promise(function(resolve, reject) {
+        User().where({email: email}).first('*').then(function(user) {
+            (!user) ? reject() : resolve(user);
+        });
+    });
+}
+
+function create(user) {
+    return new Promise(function(resolve, reject) {
+        User().insert(user)
+            .returning('*')
+            .then(function(createdUser) {
+                createdUser = createdUser[0];
+                resolve(createdUser);
+            }).catch(reject);
+    });
+}
+
+function exists(email) {
+    return new Promise(function(resolve, reject) {
+        User().where({email: email}).first('*').then(function(user) {
+            (!user) ? resolve(false) : resolve(true);
+        }).catch(reject);
+    });
+}
+
+
+
+module.exports = {
+    findOne: findOne,
+    create: create,
+    exists: exists
 };
-
-
-const User = db.model('User', UserSchema);
-
-
-module.exports = User;

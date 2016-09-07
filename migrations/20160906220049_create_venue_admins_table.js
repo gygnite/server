@@ -4,9 +4,10 @@ exports.up = function(knex, Promise) {
         table.increments();
         table.integer('user_id').references('id').inTable('users');
         table.integer('venue_id').references('id').inTable('venues');
+        table.timestamps();
     });
 };
 
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTable('venues_admins');
+    return knex.schema.dropTable('venue_admins');
 };

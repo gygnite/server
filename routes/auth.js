@@ -34,9 +34,9 @@ router.get('/',
     expressJWT({
         secret: process.env.JWT_SECRET
     }), function(req, res) {
-        if (req.user && req.user._doc) {
+        if (req.user) {
             res.status(200).json({
-                user: req.user._doc
+                user: req.user
             });
         } else {
             res.status(401).json({
@@ -47,93 +47,99 @@ router.get('/',
 
 
 
-
 router.post('/login', function(req, res) {
-    Joi.validate(req.body, loginSchema, function(err, validated) {
+    var inputtedUser = req.body;
+
+    Joi.validate(inputtedUser, loginSchema, handleValidation);
+
+    function handleValidation(err, validated) {
         if (err) {
             return errors.authorization.invalidCredentials(res);
         } else {
-            User.findOne({email: validated.email}, '+password', function(err, user) {
-                if (user) {
-                    //user exists, check login compare
-                    bcrypt.compare(validated.password, user.password, function(err, result) {
-                        if (err || !result) {
-                            return errors.authorization.invalidCredentials(res);
-                        } else {
-                            var currUser = User.findOne({email: validated.email}, function(err, existing) {
+            loginUser();
+        }
+    }
 
-                                var token = jwt.sign(existing, process.env.JWT_SECRET);
-                                return res.json({
-                                    user: existing,
-                                    token: token
-                                });
-                            });
-                        }
-                    });
-                } else {
-                    //user doesn't exist, throw invalid credentials
+    function loginUser() {
+        User.findOne(inputtedUser.email)
+        .then(function(user) {
+            bcrypt.compare(inputtedUser.password, user.password, function(err, result) {
+                if (err || !result) {
                     return errors.authorization.invalidCredentials(res);
+                } else {
+                    delete user.password;
+                    var token = jwt.sign(user, process.env.JWT_SECRET);
+                    return res.json({
+                        user: user,
+                        token: token
+                    });
                 }
             });
-        }
-    });
-
+        }).catch(function() {
+            return errors.authorization.invalidCredentials(res);
+        });
+    }
 
 });
 
 
-
-
 router.post('/signup', function(req, res) {
-    Joi.validate(req.body, signupSchema, function(err, value) {
+    var inputtedUser = req.body;
+    Joi.validate(req.body, signupSchema, validateUser);
+
+    function validateUser(err, value) {
         if (err) {
-            //invalid login credentials
             return errors.authorization.invalidCredentials(res);
         } else {
-            //find user, if not exists, create, otherwise login?
-            User.findOne({email: value.email}, function(err, user) {
-                if (!user) {
-                    //user not found
-                    bcrypt.hash(value.password, 10, function(err, hash) {
-                        if (!err) {
-                            var newuser = new User({
-                                email: value.email,
-                                password: hash,
-                                first_name: value.first_name || '',
-                                last_name: value.last_name || '',
-                            });
-                            newuser.save();
-
-                            // console.log("newuser: ", newuser.activation_code);
-
-                            //send registration email
-                            emailer.send('account_activation', {
-                                to: value.email,
-                                subject: 'Welcome to Gygnite!',
-                                mergeable: {
-                                    first_name: value.first_name,
-                                    activation_code: newuser.activation_code
-                                }
-                            });
-
-                            return res.json({
-                                success: true,
-                                message: 'Account created'
-                            });
-                        } else {
-                            return errors.database.generalDatabaseError(res);
-                        }
-                    });
+            User.exists(inputtedUser.email)
+            .then(function(userExists) {
+                if (!userExists) {
+                    signupUser();
                 } else {
                     return errors.authorization.invalidCredentials(res, {
                         message: 'Account already exists, please log in.'
                     });
                 }
+            }).catch(function(err) {
+                return errors.database.generalDatabaseError(res);
             });
         }
-    });
-});
+    }
 
+    function signupUser() {
+        bcrypt.hash(inputtedUser.password, 10, function(err, hash) {
+            if (err) {
+                return errors.database.generalDatabaseError(res);
+            } else {
+                User.create({
+                    first_name: inputtedUser.first_name,
+                    last_name: inputtedUser.last_name,
+                    email: inputtedUser.email,
+                    password: hash
+                }).then(function(createdUser) {
+
+                    sendRegistrationEmail(createdUser);
+
+                    return res.json({
+                        success: true,
+                        message: 'Account created'
+                    });
+                });
+            }
+        });
+    }
+
+    function sendRegistrationEmail(user) {
+        emailer.send('account_activation', {
+            to: user.email,
+            subject: 'Welcome to Gygnite!',
+            mergeable: {
+                first_name: user.first_name,
+                activation_code: user.activation_code
+            }
+        });
+    }
+});
 
 
 router.post('/register/:code', function(req, res) {
@@ -144,14 +150,12 @@ router.post('/register/:code', function(req, res) {
             fixme: true
         });
     }
-
     User.findOne({activation_code: req.params.code}).then(function(user) {
         console.log("user found!", user);
         res.json({
             user: user
         });
     });
-
 });
 
 
