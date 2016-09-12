@@ -8,7 +8,7 @@ const bands = require('./bands');
 const venues = require('./venues');
 
 router.use('/users', users);
-router.use('/admin', admin);
+router.use('/admins', admins);
 router.use('/bands', bands);
 router.use('/venues', venues);
 

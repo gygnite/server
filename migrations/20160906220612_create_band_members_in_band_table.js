@@ -4,7 +4,8 @@ exports.up = function(knex, Promise) {
         table.increments();
         table.integer('band_member_id').references('id').inTable('band_members');
         table.integer('band_id').references('id').inTable('bands');
-        table.timestamps();
+        table.timestamp('created_at').defaultTo(knex.fn.now());
+        table.timestamp('deleted_at');
     });
 };
 

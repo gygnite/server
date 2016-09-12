@@ -2,14 +2,19 @@
 
 module.exports = {
 
-  development: {
-    client: 'pg',
-    connection: 'postgresql://localhost/gygnite'
-  },
+    development: {
+        client: 'pg',
+        connection: 'postgresql://localhost/gygnite'
+    },
 
-  production: {
-    client: 'pg',
-    connection: process.env.DATABASE_URL
-  }
+    'test': {
+        client: 'pg',
+        connection: 'postgresql://localhost/gygnite-test'
+    },
+
+    production: {
+        client: 'pg',
+        connection: process.env.DATABASE_URL
+    }
 
 };

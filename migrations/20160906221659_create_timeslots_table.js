@@ -6,7 +6,8 @@ exports.up = function(knex, Promise) {
         table.time('end_time');
         table.integer('venue_id').references('id').inTable('venues');
         table.integer('band_id').references('id').inTable('bands');
-        table.timestamps();
+        table.timestamp('created_at').defaultTo(knex.fn.now());
+        table.timestamp('deleted_at');
     });
 };
 

@@ -1,14 +1,16 @@
 'use strict';
+var randomstring = require('randomstring');
+
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('venues', function(table) {
         table.increments();
         table.string('name');
-        table.string('city');
-        table.string('state');
+        table.string('slug').notNullable().unique().defaultTo(randomstring.generate());
+        table.text('bio');
         table.string('lat').notNullable();
         table.string('lng').notNullable();
+        table.string('google_place_id').notNullable();
         table.string('capacity');
-        table.text('bio');
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('updated_at').defaultTo(knex.fn.now());
         table.timestamp('deleted_at').defaultTo();

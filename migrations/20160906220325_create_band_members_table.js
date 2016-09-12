@@ -8,7 +8,8 @@ exports.up = function(knex, Promise) {
         table.integer('birthdate_day');
         table.integer('birthdate_month');
         table.integer('birthdate_year');
-        table.timestamps();
+        table.timestamp('created_at').defaultTo(knex.fn.now());
+        table.timestamp('deleted_at');
     });
 };
 

@@ -7,11 +7,12 @@ exports.up = function(knex, Promise) {
         table.string('name').notNullable();
         table.string('slug').notNullable().unique().defaultTo(randomstring.generate());
         table.text('bio');
-        table.string('year_established');
-        table.string('location');
+        table.integer('year_established');
+        table.string('city');
+        table.string('state');
         table.text('gear_owned');
         table.text('gear_needed');
-        table.integer('avg_set_length_minutes');
+        table.integer('avg_set_length');
         table.text('influences');
         table.string('website_url', 2082);
         table.string('soundcloud_url', 2082);

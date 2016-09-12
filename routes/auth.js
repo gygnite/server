@@ -130,14 +130,14 @@ router.post('/signup', function(req, res) {
     }
 
     function sendRegistrationEmail(user) {
-        emailer.send('account_activation', {
-            to: user.email,
-            subject: 'Welcome to Gygnite!',
-            mergeable: {
-                first_name: user.first_name,
-                activation_code: user.activation_code
-            }
-        });
+        // emailer.send('account_activation', {
+        //     to: user.email,
+        //     subject: 'Welcome to Gygnite!',
+        //     mergeable: {
+        //         first_name: user.first_name,
+        //         activation_code: user.activation_code
+        //     }
+        // });
     }
 });
 

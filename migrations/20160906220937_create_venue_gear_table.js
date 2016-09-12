@@ -5,7 +5,8 @@ exports.up = function(knex, Promise) {
         table.string('item');
         table.integer('quanitity');
         table.integer('venue_id').references('id').inTable('venues');
-        table.timestamps();
+        table.timestamp('created_at').defaultTo(knex.fn.now());
+        table.timestamp('deleted_at');
     });
 };
 

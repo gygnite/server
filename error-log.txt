@@ -1,0 +1,190 @@
+Thu Sep 08 2016 21:52:35 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : PUT : /admins/venues/undefined : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"Rf211ncrPXUByTeHh0QNGEUh5Q90twq0","created_at":"2016-09-08T17:51:01.621Z","deleted_at":null,"iat":1473357064} :  An error occurred updating venue by slug: undefined
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:225:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+Bands is not defined
+Thu Sep 08 2016 21:57:09 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : DELETE : /admins/bands/undefined : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"Rf211ncrPXUByTeHh0QNGEUh5Q90twq0","created_at":"2016-09-08T17:51:01.621Z","deleted_at":null,"iat":1473357064} :  An error occurred deleting band by slug: undefined
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:136:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+Undefined binding(s) detected when compiling UPDATE query: update "bands" set "deleted_at" = ? where "id" = ? returning *
+Thu Sep 08 2016 21:58:35 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : DELETE : /admins/bands/undefined : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"Rf211ncrPXUByTeHh0QNGEUh5Q90twq0","created_at":"2016-09-08T17:51:01.621Z","deleted_at":null,"iat":1473357064} :  An error occurred deleting band by slug: undefined
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:237:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+Undefined binding(s) detected when compiling UPDATE query: update "bands" set "deleted_at" = ? where "id" = ? returning *
+Thu Sep 08 2016 21:59:27 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : DELETE : /admins/bands/undefined : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"Rf211ncrPXUByTeHh0QNGEUh5Q90twq0","created_at":"2016-09-08T17:51:01.621Z","deleted_at":null,"iat":1473357064} :  An error occurred deleting band by slug: undefined
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:237:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+Undefined binding(s) detected when compiling UPDATE query: update "bands" set "deleted_at" = ? where "id" = ? returning *
+Thu Sep 08 2016 21:59:55 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : DELETE : /admins/bands/undefined : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"Rf211ncrPXUByTeHh0QNGEUh5Q90twq0","created_at":"2016-09-08T17:51:01.621Z","deleted_at":null,"iat":1473357064} :  An error occurred deleting band by slug: undefined
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:237:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+Undefined binding(s) detected when compiling UPDATE query: update "bands" set "deleted_at" = ? where "id" = ? returning *
+Thu Sep 08 2016 22:00:45 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : DELETE : /admins/bands/undefined : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"Rf211ncrPXUByTeHh0QNGEUh5Q90twq0","created_at":"2016-09-08T17:51:01.621Z","deleted_at":null,"iat":1473357064} :  An error occurred deleting band by slug: undefined
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:237:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+Undefined binding(s) detected when compiling UPDATE query: update "bands" set "deleted_at" = ? where "id" = ? returning *
+Thu Sep 08 2016 22:00:58 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : DELETE : /admins/bands/undefined : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"Rf211ncrPXUByTeHh0QNGEUh5Q90twq0","created_at":"2016-09-08T17:51:01.621Z","deleted_at":null,"iat":1473357064} :  An error occurred deleting band by slug: undefined
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:237:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+Undefined binding(s) detected when compiling UPDATE query: update "bands" set "deleted_at" = ? where "id" = ? returning *
+Thu Sep 08 2016 22:02:11 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : DELETE : /admins/bands/undefined : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"Rf211ncrPXUByTeHh0QNGEUh5Q90twq0","created_at":"2016-09-08T17:51:01.621Z","deleted_at":null,"iat":1473357064} :  An error occurred deleting band by slug: undefined
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:238:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+Undefined binding(s) detected when compiling UPDATE query: update "bands" set "deleted_at" = ? where "id" = ? returning *
+Thu Sep 08 2016 22:02:28 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : DELETE : /admins/bands/undefined : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"Rf211ncrPXUByTeHh0QNGEUh5Q90twq0","created_at":"2016-09-08T17:51:01.621Z","deleted_at":null,"iat":1473357064} :  An error occurred deleting band by slug: undefined
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:238:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+Undefined binding(s) detected when compiling UPDATE query: update "bands" set "deleted_at" = ? where "id" = ? returning *
+Thu Sep 08 2016 22:02:54 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : DELETE : /admins/bands/undefined : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"Rf211ncrPXUByTeHh0QNGEUh5Q90twq0","created_at":"2016-09-08T17:51:01.621Z","deleted_at":null,"iat":1473357064} :  An error occurred deleting band by slug: undefined
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:239:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+Undefined binding(s) detected when compiling UPDATE query: update "bands" set "deleted_at" = ? where "id" = ? returning *

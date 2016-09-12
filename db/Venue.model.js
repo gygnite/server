@@ -6,44 +6,40 @@ const assign = require('object-assign');
 const slug = require('slug');
 const randomstring = require('randomstring');
 
-function Bands() {
-    return knex('bands');
+function Venues() {
+    return knex('venues');
 }
 
-
-function validate(band) {
+function validate(venue) {
     return new Promise(function(resolve, reject) {
-        resolve(band);
-
-        //FIXME:1 joi validations
-        //FIXME:2 Make sure band name doesn't exist!
-            //If they do exist, check if deleted@, if true, ok to create band
-
-        //resolve with band
+        resolve(venue);
+        //joi validations
+        //resolve with venue
         //reject with errors
     });
 }
 
-function create(band) {
+function create(venue) {
     return new Promise(function(resolve, reject) {
-        band = assign({}, band, {
+        venue = assign({}, venue, {
             slug: createSlug()
         });
-        Bands().insert(band).returning('*')
-            .then(function(newBand) {
-                newBand = newBand[0];
-                resolve(newBand);
+        Venues().insert(venue).returning('*')
+            .then(function(newVenue) {
+                newVenue = newVenue[0];
+                resolve(newVenue);
             })
-            .catch(reject);
+            .catch(function(err) {
+                //reject error occured
+                reject(err);
+            });
     });
 }
 
-function update(slug, band) {
+function update(slug, venue) {
     return new Promise(function(resolve, reject) {
-
-        band = updateCreatedAt(band);
-
-        Bands().where({slug: slug}).update(band, '*')
+        venue = updateCreatedAt(venue);
+        Bands().where({slug: slug}).update(venue, '*')
         .then(function(updated) {
             updated = updated[0];
             resolve(updated);
@@ -53,9 +49,10 @@ function update(slug, band) {
 
 function softDelete(slug) {
     return new Promise(function(resolve, reject) {
-        Bands().where({slug: slug}).first('*').then(function(bandToUpdate) {
-            bandToUpdate = updateDeletedAt(bandToUpdate);
-            return Bands().where({id: bandToUpdate.id}).update(bandToUpdate, '*');
+        Venues().where({slug: slug}).first('*').then(function(venueToUpdate) {
+            venueToUpdate = updateDeletedAt(venueToUpdate);
+            console.log("venueToUpdate", venueToUpdate)
+            return Venues().where({id: venueToUpdate.id}).update(venueToUpdate, '*');
         }).then(function(deleted) {
             resolve(deleted[0]);
         }).catch(reject);
@@ -67,22 +64,23 @@ function findAllWithLimit(limit, offset) {
     if (!limit || typeof limit !== 'number') {limit = 10000;}
     if (!offset || typeof limit !== 'number') {offset = 0;}
     return new Promise(function(resolve, reject) {
-        Bands().where({deleted_at: null}).limit(limit).offset(offset).then(resolve).catch(reject);
+        Venues().limit(limit).offset(offset).then(resolve).catch(reject);
     });
 }
 
 
 function findAll() {
     return new Promise(function(resolve, reject) {
-        Bands().where({deleted_at: null}).then(resolve).catch(reject);
+        Venues().where({deleted_at: null}).then(resolve).catch(reject);
     });
 }
 
 
 function findOneBySlug(slug) {
     // FIXME:10 Add Admins Array to output?
+    // FIXME: What if band has been deleted?
     return new Promise(function(resolve, reject) {
-        Bands().where({deleted_at: null, slug: slug})
+        Venues().where({slug: slug, deleted_at: null})
         .first('*')
         .then(resolve)
         .catch(reject);
@@ -92,7 +90,7 @@ function findOneBySlug(slug) {
 
 function findOneById(id) {
     return new Promise(function(resolve, reject) {
-        Bands().where({deleted_at: null, id: id})
+        Venues().where({id: id, deleted_at: null})
         .first('*')
         .then(resolve)
         .catch(reject);
@@ -100,14 +98,14 @@ function findOneById(id) {
 }
 
 
-function updateCreatedAt(band) {
-    return assign({}, band, {
+function updateCreatedAt(venue) {
+    return assign({}, venue, {
         updated_at: new Date()
     });
 }
 
-function updateDeletedAt(band) {
-    return assign({}, band, {
+function updateDeletedAt(venue) {
+    return assign({}, venue, {
         deleted_at: new Date()
     });
 }
@@ -116,7 +114,6 @@ function updateDeletedAt(band) {
 function createSlug() {
     return randomstring.generate(10).toLowerCase();
 }
-
 
 
 module.exports = {
