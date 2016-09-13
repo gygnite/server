@@ -60,13 +60,29 @@ router.get('/bands', function(req, res) {
 router.post('/bands', function(req, res) {
     var user = req.user;
     var inputtedBand = req.body;
+    var cityState = getCityStateFromLocation(req.body.location);
+
+    var influences = req.body.influences || [];
+    var gear_needed = req.body.gear_needed || [];
+    var gear_owned = req.body.gear_owned || [];
+
+    var newBand = assign({}, inputtedBand, {
+        city: cityState.city,
+        state: cityState.state,
+        lat: req.body.location.location.lat,
+        lng: req.body.location.location.lng,
+        google_place_id: req.body.location.placeId,
+        influences: influences.join(', ').replace(/(\])/g, '').replace(/(\[)/g, ''),
+        gear_needed: gear_needed.join(', ').replace(/(\])/g, '').replace(/(\[)/g, ''),
+        gear_owned: gear_owned.join(', ').replace(/(\])/g, '').replace(/(\[)/g, '')
+    });
+    delete newBand.location;
 
     //validate inputs
-    Band.validate(inputtedBand)
+    Band.validate(newBand)
     .then(create)
     .then(addAdminToBand)
     .then(function(createdBand) {
-        // console.log("new band data", createdBand);
         res.status(200).json({
             created: true,
             data: {
@@ -168,7 +184,21 @@ router.get('/venues', function(req, res) {
 router.post('/venues', function(req, res) {
     var user = req.user;
     var inputtedVenue = req.body;
-    Venue.validate(inputtedVenue)
+    console.log("req.body: ", inputtedVenue)
+
+    var address = inputtedVenue.location.label.substring(0, inputtedVenue.location.label.indexOf(','));
+    var city_state = inputtedVenue.location.label.substring(inputtedVenue.location.label.indexOf(',') + 2, inputtedVenue.location.label.lastIndexOf(','));
+
+    var newVenue = assign({}, inputtedVenue, {
+        address: address,
+        city_state: city_state,
+        lat: inputtedVenue.location.location.lat,
+        lng: inputtedVenue.location.location.lng,
+        google_place_id: inputtedVenue.location.placeId
+    });
+    delete newVenue.location;
+
+    Venue.validate(newVenue)
         .then(create)
         .then(addAdminToVenue)
         .then(function(createdVenue) {
@@ -200,11 +230,11 @@ router.post('/venues', function(req, res) {
 
 router.get('/venues/:slug', function(req, res) {
     Venue.findOneBySlug(req.params.slug)
-    .then(function(band) {
-        band = (!band) ? null : band;
+    .then(function(venue) {
+        venue = (!venue) ? null : venue;
         res.status(200).json({
             slug: req.params.slug,
-            band: band
+            venue: venue
         });
     })
     .catch(function(err) {
@@ -247,3 +277,23 @@ router.delete('/venues/:slug', function(req, res) {
 
 
 module.exports = router;
+
+
+
+
+function getCityStateFromLocation(location) {
+    var city = location.label.substring(0, location.label.indexOf(','));
+    var state = location.label.substring(location.label.indexOf(',') + 2, location.label.lastIndexOf(','));
+    return {
+        city: city,
+        state: state
+    }
+}
+
+function getGooglePlaceId(location) {
+    return location.placeId;
+}
+
+function getLatLong(location) {
+    return location.location;
+}

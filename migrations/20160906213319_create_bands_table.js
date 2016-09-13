@@ -10,6 +10,9 @@ exports.up = function(knex, Promise) {
         table.integer('year_established');
         table.string('city');
         table.string('state');
+        table.string('google_place_id');
+        table.string('lat');
+        table.string('lng');
         table.text('gear_owned');
         table.text('gear_needed');
         table.integer('avg_set_length');

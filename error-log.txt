@@ -188,3 +188,212 @@ Error
     at tryOnImmediate (timers.js:550:5)
     at processImmediate [as _immediateCallback] (timers.js:529:5)
 Undefined binding(s) detected when compiling UPDATE query: update "bands" set "deleted_at" = ? where "id" = ? returning *
+Mon Sep 12 2016 20:47:51 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : POST : /admins/bands : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"IILf7Ifz9JCQIMELjjILkjkMqkz07cpF","created_at":"2016-09-09T03:05:41.707Z","deleted_at":null,"iat":1473724540} : {"name":"My Awesome Band","location":{"label":"Fort Collins, CO, United States","placeId":"ChIJrTDwkEVKaYcRgkCrtChCsak","isFixture":false,"gmaps":{"address_components":[{"long_name":"Fort Collins","short_name":"Fort Collins","types":["locality","political"]},{"long_name":"Larimer County","short_name":"Larimer County","types":["administrative_area_level_2","political"]},{"long_name":"Colorado","short_name":"CO","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formatted_address":"Fort Collins, CO, USA","geometry":{"bounds":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002},"location":{"lat":40.5852602,"lng":-105.08442300000002},"location_type":"APPROXIMATE","viewport":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002}},"place_id":"ChIJrTDwkEVKaYcRgkCrtChCsak","types":["locality","political"]},"location":{"lat":40.5852602,"lng":-105.08442300000002}},"bio":"So just in summing up and I just wrote a few of these little points down because it's very important. And I watch these teleprompters, and by the way I think any president candidate that runs should not be allowed to use a teleprompter, because we got one that uses teleprompters. And people say, oh he is so quick on his feet. He is reading it. I mean give me a break. Everything is read. You don't really test the mettle of a man or a woman unless they can get up on stage and talk. And that's what we ended up getting--the king of teleprompters. But, so when I look at these things here I say you know what, it's so much easier, it would be so nice, just bah, pa, bah, pa, bah, bing, bing, bing. No problems, get off stage, everybody falls asleep and that's the end of that. But we have to do something about these teleprompters.\n","year_established":"2009","avg_set_length":"90","influences":["Main Squeeze","New Mastersounds"],"gear_owned":["microphones","bass","guitar","drums","violin"],"gear_needed":["monitors"]}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:81:13
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+insert into "bands" ("avg_set_length", "bio", "gear_needed", "gear_owned", "influences", "location", "name", "slug", "year_established") values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning * - column "location" of relation "bands" does not exist
+Mon Sep 12 2016 21:07:28 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : POST : /admins/bands : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"IILf7Ifz9JCQIMELjjILkjkMqkz07cpF","created_at":"2016-09-09T03:05:41.707Z","deleted_at":null,"iat":1473724540} : {"name":"My Awesome Band","location":{"label":"Fort Collins, CO, United States","placeId":"ChIJrTDwkEVKaYcRgkCrtChCsak","isFixture":false,"gmaps":{"address_components":[{"long_name":"Fort Collins","short_name":"Fort Collins","types":["locality","political"]},{"long_name":"Larimer County","short_name":"Larimer County","types":["administrative_area_level_2","political"]},{"long_name":"Colorado","short_name":"CO","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formatted_address":"Fort Collins, CO, USA","geometry":{"bounds":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002},"location":{"lat":40.5852602,"lng":-105.08442300000002},"location_type":"APPROXIMATE","viewport":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002}},"place_id":"ChIJrTDwkEVKaYcRgkCrtChCsak","types":["locality","political"]},"location":{"lat":40.5852602,"lng":-105.08442300000002}},"bio":"So just in summing up and I just wrote a few of these little points down because it's very important. And I watch these teleprompters, and by the way I think any president candidate that runs should not be allowed to use a teleprompter, because we got one that uses teleprompters. And people say, oh he is so quick on his feet. He is reading it. I mean give me a break. Everything is read. You don't really test the mettle of a man or a woman unless they can get up on stage and talk. And that's what we ended up getting--the king of teleprompters. But, so when I look at these things here I say you know what, it's so much easier, it would be so nice, just bah, pa, bah, pa, bah, bing, bing, bing. No problems, get off stage, everybody falls asleep and that's the end of that. But we have to do something about these teleprompters.\n","year_established":"2009","avg_set_length":"90","influences":["Main Squeeze","New Mastersounds"],"gear_owned":["microphones","bass","guitar","drums","violin"],"gear_needed":["monitors"]}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:95:13
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+insert into "bands" ("avg_set_length", "bio", "city", "gear_needed", "gear_owned", "google_place_id", "influences", "lat", "lng", "name", "slug", "state", "year_established") values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) returning * - column "google_place_id" of relation "bands" does not exist
+Mon Sep 12 2016 22:06:22 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : POST : /admins/bands : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"IILf7Ifz9JCQIMELjjILkjkMqkz07cpF","created_at":"2016-09-09T03:05:41.707Z","deleted_at":null,"iat":1473724540} : {"name":"asldkfj","location":{"label":"Fort Collins, CO, United States","placeId":"ChIJrTDwkEVKaYcRgkCrtChCsak","isFixture":false,"gmaps":{"address_components":[{"long_name":"Fort Collins","short_name":"Fort Collins","types":["locality","political"]},{"long_name":"Larimer County","short_name":"Larimer County","types":["administrative_area_level_2","political"]},{"long_name":"Colorado","short_name":"CO","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formatted_address":"Fort Collins, CO, USA","geometry":{"bounds":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002},"location":{"lat":40.5852602,"lng":-105.08442300000002},"location_type":"APPROXIMATE","viewport":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002}},"place_id":"ChIJrTDwkEVKaYcRgkCrtChCsak","types":["locality","political"]},"location":{"lat":40.5852602,"lng":-105.08442300000002}}}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:97:13
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+insert into "bands" ("location", "name", "slug") values ($1, $2, $3) returning * - column "location" of relation "bands" does not exist
+Mon Sep 12 2016 22:06:45 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : POST : /admins/bands : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"IILf7Ifz9JCQIMELjjILkjkMqkz07cpF","created_at":"2016-09-09T03:05:41.707Z","deleted_at":null,"iat":1473724540} : {"name":"asldfkj","location":{"label":"Fort Collins, CO, United States","placeId":"ChIJrTDwkEVKaYcRgkCrtChCsak","isFixture":false,"gmaps":{"address_components":[{"long_name":"Fort Collins","short_name":"Fort Collins","types":["locality","political"]},{"long_name":"Larimer County","short_name":"Larimer County","types":["administrative_area_level_2","political"]},{"long_name":"Colorado","short_name":"CO","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formatted_address":"Fort Collins, CO, USA","geometry":{"bounds":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002},"location":{"lat":40.5852602,"lng":-105.08442300000002},"location_type":"APPROXIMATE","viewport":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002}},"place_id":"ChIJrTDwkEVKaYcRgkCrtChCsak","types":["locality","political"]},"location":{"lat":40.5852602,"lng":-105.08442300000002}}}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:97:13
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+insert into "bands" ("location", "name", "slug") values ($1, $2, $3) returning * - column "location" of relation "bands" does not exist
+Mon Sep 12 2016 22:06:47 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : POST : /admins/bands : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"IILf7Ifz9JCQIMELjjILkjkMqkz07cpF","created_at":"2016-09-09T03:05:41.707Z","deleted_at":null,"iat":1473724540} : {"name":"asldfkj","location":{"label":"Fort Collins, CO, United States","placeId":"ChIJrTDwkEVKaYcRgkCrtChCsak","isFixture":false,"gmaps":{"address_components":[{"long_name":"Fort Collins","short_name":"Fort Collins","types":["locality","political"]},{"long_name":"Larimer County","short_name":"Larimer County","types":["administrative_area_level_2","political"]},{"long_name":"Colorado","short_name":"CO","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formatted_address":"Fort Collins, CO, USA","geometry":{"bounds":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002},"location":{"lat":40.5852602,"lng":-105.08442300000002},"location_type":"APPROXIMATE","viewport":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002}},"place_id":"ChIJrTDwkEVKaYcRgkCrtChCsak","types":["locality","political"]},"location":{"lat":40.5852602,"lng":-105.08442300000002}}}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:97:13
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+insert into "bands" ("location", "name", "slug") values ($1, $2, $3) returning * - column "location" of relation "bands" does not exist
+Mon Sep 12 2016 22:07:04 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : POST : /admins/bands : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"IILf7Ifz9JCQIMELjjILkjkMqkz07cpF","created_at":"2016-09-09T03:05:41.707Z","deleted_at":null,"iat":1473724540} : {"name":"asldfkj","location":{"label":"Fort Collins, CO, United States","placeId":"ChIJrTDwkEVKaYcRgkCrtChCsak","isFixture":false,"gmaps":{"address_components":[{"long_name":"Fort Collins","short_name":"Fort Collins","types":["locality","political"]},{"long_name":"Larimer County","short_name":"Larimer County","types":["administrative_area_level_2","political"]},{"long_name":"Colorado","short_name":"CO","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formatted_address":"Fort Collins, CO, USA","geometry":{"bounds":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002},"location":{"lat":40.5852602,"lng":-105.08442300000002},"location_type":"APPROXIMATE","viewport":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002}},"place_id":"ChIJrTDwkEVKaYcRgkCrtChCsak","types":["locality","political"]},"location":{"lat":40.5852602,"lng":-105.08442300000002}}}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:97:13
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+insert into "bands" ("location", "name", "slug") values ($1, $2, $3) returning * - column "location" of relation "bands" does not exist
+Mon Sep 12 2016 22:07:38 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : POST : /admins/bands : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"IILf7Ifz9JCQIMELjjILkjkMqkz07cpF","created_at":"2016-09-09T03:05:41.707Z","deleted_at":null,"iat":1473724540} : {"name":"asdkfj","location":{"label":"Fort Collins, CO, United States","placeId":"ChIJrTDwkEVKaYcRgkCrtChCsak","isFixture":false,"gmaps":{"address_components":[{"long_name":"Fort Collins","short_name":"Fort Collins","types":["locality","political"]},{"long_name":"Larimer County","short_name":"Larimer County","types":["administrative_area_level_2","political"]},{"long_name":"Colorado","short_name":"CO","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formatted_address":"Fort Collins, CO, USA","geometry":{"bounds":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002},"location":{"lat":40.5852602,"lng":-105.08442300000002},"location_type":"APPROXIMATE","viewport":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002}},"place_id":"ChIJrTDwkEVKaYcRgkCrtChCsak","types":["locality","political"]},"location":{"lat":40.5852602,"lng":-105.08442300000002}}}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:97:13
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+insert into "bands" ("location", "name", "slug") values ($1, $2, $3) returning * - column "location" of relation "bands" does not exist
+Mon Sep 12 2016 22:08:12 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : POST : /admins/bands : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"IILf7Ifz9JCQIMELjjILkjkMqkz07cpF","created_at":"2016-09-09T03:05:41.707Z","deleted_at":null,"iat":1473724540} : {"name":"asdfj","location":{"label":"Fort Collins, CO, United States","placeId":"ChIJrTDwkEVKaYcRgkCrtChCsak","isFixture":false,"gmaps":{"address_components":[{"long_name":"Fort Collins","short_name":"Fort Collins","types":["locality","political"]},{"long_name":"Larimer County","short_name":"Larimer County","types":["administrative_area_level_2","political"]},{"long_name":"Colorado","short_name":"CO","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formatted_address":"Fort Collins, CO, USA","geometry":{"bounds":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002},"location":{"lat":40.5852602,"lng":-105.08442300000002},"location_type":"APPROXIMATE","viewport":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002}},"place_id":"ChIJrTDwkEVKaYcRgkCrtChCsak","types":["locality","political"]},"location":{"lat":40.5852602,"lng":-105.08442300000002}}}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:97:13
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+insert into "bands" ("location", "name", "slug") values ($1, $2, $3) returning * - column "location" of relation "bands" does not exist
+Mon Sep 12 2016 22:08:38 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : POST : /admins/bands : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"IILf7Ifz9JCQIMELjjILkjkMqkz07cpF","created_at":"2016-09-09T03:05:41.707Z","deleted_at":null,"iat":1473724540} : {"name":"band","location":{"label":"Fort Collins, CO, United States","placeId":"ChIJrTDwkEVKaYcRgkCrtChCsak","isFixture":false,"gmaps":{"address_components":[{"long_name":"Fort Collins","short_name":"Fort Collins","types":["locality","political"]},{"long_name":"Larimer County","short_name":"Larimer County","types":["administrative_area_level_2","political"]},{"long_name":"Colorado","short_name":"CO","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formatted_address":"Fort Collins, CO, USA","geometry":{"bounds":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002},"location":{"lat":40.5852602,"lng":-105.08442300000002},"location_type":"APPROXIMATE","viewport":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002}},"place_id":"ChIJrTDwkEVKaYcRgkCrtChCsak","types":["locality","political"]},"location":{"lat":40.5852602,"lng":-105.08442300000002}}}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:97:13
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+insert into "bands" ("location", "name", "slug") values ($1, $2, $3) returning * - column "location" of relation "bands" does not exist
+Mon Sep 12 2016 22:09:03 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : POST : /admins/bands : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"IILf7Ifz9JCQIMELjjILkjkMqkz07cpF","created_at":"2016-09-09T03:05:41.707Z","deleted_at":null,"iat":1473724540} : {"name":"things","location":{"label":"Fort Collins, CO, United States","placeId":"ChIJrTDwkEVKaYcRgkCrtChCsak","isFixture":false,"gmaps":{"address_components":[{"long_name":"Fort Collins","short_name":"Fort Collins","types":["locality","political"]},{"long_name":"Larimer County","short_name":"Larimer County","types":["administrative_area_level_2","political"]},{"long_name":"Colorado","short_name":"CO","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formatted_address":"Fort Collins, CO, USA","geometry":{"bounds":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002},"location":{"lat":40.5852602,"lng":-105.08442300000002},"location_type":"APPROXIMATE","viewport":{"south":40.47404410000001,"west":-105.15322400000002,"north":40.6392729,"east":-104.98208010000002}},"place_id":"ChIJrTDwkEVKaYcRgkCrtChCsak","types":["locality","political"]},"location":{"lat":40.5852602,"lng":-105.08442300000002}}}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:97:13
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+insert into "bands" ("location", "name", "slug") values ($1, $2, $3) returning * - column "location" of relation "bands" does not exist
+Mon Sep 12 2016 23:36:04 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : POST : /admins/venues : {"id":1,"email":"gygnite@mailinator.com","first_name":"Bob","last_name":"Jones","activation_code":"IILf7Ifz9JCQIMELjjILkjkMqkz07cpF","created_at":"2016-09-09T03:05:41.707Z","deleted_at":null,"iat":1473724540} : {"name":"Aggie Theatre","bio":"Fort Collins premier independent live music venue! Located right in the heart of Fort Collins on College Ave just blocks from campus. \n","location":{"label":"204 South College Avenue, Fort Collins, CO 80524, United States","placeId":"ChIJTW1bA_VKaYcRJoxvlw5mMtk","isFixture":false,"gmaps":{"address_components":[{"long_name":"204","short_name":"204","types":["street_number"]},{"long_name":"South College Avenue","short_name":"S College Ave","types":["route"]},{"long_name":"Old Town","short_name":"Old Town","types":["neighborhood","political"]},{"long_name":"Fort Collins","short_name":"Fort Collins","types":["locality","political"]},{"long_name":"Larimer County","short_name":"Larimer County","types":["administrative_area_level_2","political"]},{"long_name":"Colorado","short_name":"CO","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]},{"long_name":"80524","short_name":"80524","types":["postal_code"]},{"long_name":"2811","short_name":"2811","types":["postal_code_suffix"]}],"formatted_address":"204 S College Ave, Fort Collins, CO 80524, USA","geometry":{"location":{"lat":40.5852592,"lng":-105.07637169999998},"location_type":"ROOFTOP","viewport":{"south":40.5839102197085,"west":-105.07772068029152,"north":40.5866081802915,"east":-105.0750227197085}},"place_id":"ChIJTW1bA_VKaYcRJoxvlw5mMtk","types":["street_address"]},"location":{"lat":40.5852592,"lng":-105.07637169999998}},"capacity":"1000","website_url":"http://www.aggietheatre.com/","facebook_url":"https://www.facebook.com/AggieTheatre"}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:30:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:217:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+insert into "venues" ("address", "bio", "capacity", "city_state", "facebook_url", "google_place_id", "lat", "lng", "name", "slug", "website_url") values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning * - column "address" of relation "venues" does not exist
