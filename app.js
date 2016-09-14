@@ -41,14 +41,22 @@ app.use(function(req, res, next) {
     next();
 });
 
+// app.use(function(req, res, next) {
+//     res.redisClient = redisClient;
+//     next();
+// });
+
+
 
 var routes = {
     auth: require('./routes/auth'),
-    api: require('./routes/api')
+    api: require('./routes/api'),
+    search: require('./routes/search')
 };
 
 
 app.use('/auth', routes.auth);
+app.use('/search', routes.search);
 app.use('/api',
     expressJWT({
         secret: process.env.JWT_SECRET
