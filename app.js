@@ -17,6 +17,7 @@ const port = process.env.PORT || 4000;
 app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
+
 app.use(function(req, res, next) {
     res.throwClientError = function(message) {
         var error = new ClientError(message);
@@ -51,12 +52,16 @@ app.use(function(req, res, next) {
 var routes = {
     auth: require('./routes/auth'),
     api: require('./routes/api'),
-    search: require('./routes/search')
+    search: require('./routes/search'),
+    bands: require('./routes/bands'),
+    venues: require('./routes/venues')
 };
 
 
 app.use('/auth', routes.auth);
 app.use('/search', routes.search);
+app.use('/bands', routes.bands);
+app.use('/venues', routes.venues);
 app.use('/api',
     expressJWT({
         secret: process.env.JWT_SECRET
@@ -70,6 +75,7 @@ io.on('connection', function(socket) {
 
 /** Unauthorized JWT Error */
 app.use(function(err, req, res, next) {
+    console.log("err!", err)
     if (err.status === 401) {
         res.status(401).json({
             message: 'Invalid Token or Unauthorized',
@@ -82,7 +88,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
-    if (err.type === 'ClientError') {
+    if (err.type && err.type === 'ClientError') {
         res.json({
             error: true,
             message: err.message
@@ -93,6 +99,7 @@ app.use(function(err, req, res, next) {
             error: true,
             message: 'An error has occured. Please try again.'
         });
+        console.log("err", err);
     }
 });
 

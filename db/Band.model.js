@@ -5,6 +5,7 @@ const knex = require('./knex');
 const assign = require('object-assign');
 const slug = require('slug');
 const randomstring = require('randomstring');
+const Timeslots = require('./Timeslots.model');
 
 function Bands() {
     return knex('bands');
@@ -24,11 +25,13 @@ function validate(band) {
     });
 }
 
-function create(band) {
+function create(band, request) {
     return new Promise(function(resolve, reject) {
         band = assign({}, band, {
-            slug: createSlug()
+            slug: createSlug(),
+            profile_image: '/assets/band_avatar.png'
         });
+
         Bands().insert(band).returning('*')
             .then(function(newBand) {
                 newBand = newBand[0];
@@ -100,6 +103,27 @@ function findOneById(id) {
 }
 
 
+
+function findOneBySlugWithEvents(slug) {
+    return new Promise(function(resolve, reject) {
+        Bands().where({slug: slug}).first('*')
+        .then(function(band) {
+            return Promise.join(
+                band,
+                Timeslots.fetchByBandId(band.id),
+                knex('genres').where({band_id: band.id})
+            );
+        }).then(function(data) {
+            resolve({
+                band: data[0],
+                timeslots: data[1],
+                genres: data[2],
+            });
+        }).catch(reject);
+    });
+}
+
+
 function updateCreatedAt(band) {
     return assign({}, band, {
         updated_at: new Date()
@@ -125,5 +149,6 @@ module.exports = {
     update: update,
     softDelete: softDelete,
     findOneBySlug: findOneBySlug,
-    findOneById: findOneById
+    findOneById: findOneById,
+    findOneBySlugWithEvents: findOneBySlugWithEvents
 };

@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
         table.string('name');
         table.string('slug').notNullable().unique().defaultTo(randomstring.generate());
         table.text('bio');
+        table.string('profile_image');
         table.string('address');
         table.string('city_state');
         table.string('lat').notNullable();

@@ -5,6 +5,7 @@ const knex = require('./knex');
 const assign = require('object-assign');
 const slug = require('slug');
 const randomstring = require('randomstring');
+const Timeslots = require('./Timeslots.model');
 
 function Venues() {
     return knex('venues');
@@ -22,7 +23,8 @@ function validate(venue) {
 function create(venue) {
     return new Promise(function(resolve, reject) {
         venue = assign({}, venue, {
-            slug: createSlug()
+            slug: createSlug(),
+            profile_image: '/assets/venue_avatar.png'
         });
         Venues().insert(venue).returning('*')
             .then(function(newVenue) {
@@ -97,6 +99,23 @@ function findOneById(id) {
     });
 }
 
+function findOneBySlugWithEvents(slug) {
+    return new Promise(function(resolve, reject) {
+        Venues().where({slug: slug}).first('*')
+        .then(function(venue) {
+            return Promise.join(
+                venue,
+                Timeslots.fetchByVenueId(venue.id)
+            );
+        }).then(function(data) {
+            resolve({
+                venue: data[0],
+                timeslots: data[1],
+            });
+        }).catch(reject);
+    });
+}
+
 
 function updateCreatedAt(venue) {
     return assign({}, venue, {
@@ -122,5 +141,6 @@ module.exports = {
     update: update,
     softDelete: softDelete,
     findOneBySlug: findOneBySlug,
-    findOneById: findOneById
+    findOneById: findOneById,
+    findOneBySlugWithEvents: findOneBySlugWithEvents
 };

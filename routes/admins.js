@@ -58,6 +58,8 @@ router.get('/bands', function(req, res) {
 
 //create new band
 router.post('/bands', function(req, res) {
+    console.log("here???")
+    // console.log("req", req);
     var user = req.user;
     var inputtedBand = req.body;
     var cityState = getCityStateFromLocation(req.body.location);
@@ -100,7 +102,8 @@ router.post('/bands', function(req, res) {
     function create(band) {
         // FIXME:0 Add band name to slug
         //add band name slug to
-        return Band.create(band);
+        console.log("inputtedBand: ", inputtedBand)
+        return Band.create(band, inputtedBand);
     }
 
     function addAdminToBand(band) {
@@ -282,6 +285,7 @@ module.exports = router;
 
 
 function getCityStateFromLocation(location) {
+    console.log("location: ", location);
     var city = location.label.substring(0, location.label.indexOf(','));
     var state = location.label.substring(location.label.indexOf(',') + 2, location.label.lastIndexOf(','));
     return {

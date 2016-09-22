@@ -139,5 +139,27 @@ router.get('/bands', function(req, res) {
 // });
 
 
+router.get('/venues', function(req, res) {
+    var coordinates = {
+        nw: {
+            lat: req.query.nw_lat,
+            lng: req.query.nw_lng
+        },
+        se: {
+            lat: req.query.se_lat,
+            lng: req.query.se_lng
+        }
+    };
+    knex('venues')
+        .whereBetween('lat', [coordinates.se.lat, coordinates.nw.lat])
+        .whereBetween('lng', [coordinates.se.lng, coordinates.nw.lng])
+    .then(function(venues) {
+        res.json({
+            venues: venues
+        });
+    });
+});
+
+
 
 module.exports = router;

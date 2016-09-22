@@ -1,25 +1,23 @@
-'use strict';
-
-var BandModel = require('../db/Band.model');
-var bandSeeds = require('../db/seed_data/bands');
-var genres = require('../db/seed_data/genres');
-
-
 exports.seed = function(knex, Promise) {
     // Deletes ALL existing entries
-
-    var newBands = [];
-    bandSeeds.forEach(function(band) {
-        newBands.push(BandModel.create(band));
-    });
-    return Promise.all(newBands)
-    .then(function(allbands) {
-        var allgenres = [];
-        genres.forEach(function(g) {
-            allgenres.push(knex('genres').insert(g));
-        });
-
-        return Promise.all(allgenres);
-
-    });
+    // return Promise.all([
+    //         knex('bands').del()
+    //     ])
+    //     .then(function() {
+    //         return Promise.all([
+    //             // Inserts seed entries
+    //             knex('table_name').insert({
+    //                 id: 1,
+    //                 colName: 'rowValue1'
+    //             }),
+    //             knex('table_name').insert({
+    //                 id: 2,
+    //                 colName: 'rowValue2'
+    //             }),
+    //             knex('table_name').insert({
+    //                 id: 3,
+    //                 colName: 'rowValue3'
+    //             })
+    //         ]);
+    //     });
 };

@@ -9,6 +9,7 @@ exports.up = function(knex, Promise) {
         table.string('first_name');
         table.string('last_name');
         table.string('activation_code').defaultTo(randomstring.generate());
+        table.string('profile_image');
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('deleted_at').defaultTo();
     });

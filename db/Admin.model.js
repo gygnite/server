@@ -70,6 +70,10 @@ function findAllVenuesByAdmin(id) {
 
 
 
+
+
+
+
 module.exports = {
     addAdminToBand: addAdminToBand,
     addAdminToVenue: addAdminToVenue,

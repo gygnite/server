@@ -4,12 +4,12 @@ const router = require('express').Router();
 
 const users = require('./users');
 const admins = require('./admins');
-const bands = require('./bands');
-const venues = require('./venues');
+const booking = require('./booking');
+const messages = require('./messages');
 
 router.use('/users', users);
 router.use('/admins', admins);
-router.use('/bands', bands);
-router.use('/venues', venues);
+router.use('/booking', booking);
+router.use('/messages', messages);
 
 module.exports = router;
