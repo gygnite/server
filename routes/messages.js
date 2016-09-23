@@ -48,7 +48,8 @@ router.get('/', function(req, res) {
                         identity: {
                             type: type,
                             slug: msg[type+'_slug'],
-                            name: msg[type+'_name']
+                            name: msg[type+'_name'],
+                            image: msg[type+'_image']
                         },
                         messages: []
                     };
@@ -89,14 +90,17 @@ router.get('/', function(req, res) {
                 'band_messages.user_id',
                 'band_messages.band_id',
                 'band_messages.venue_id',
-                'band_messages.timeslot_id',
                 'band_messages.date_created',
+                'venues.profile_image as venue_image',
+                'bands.profile_image as band_image',
                 'venues.name as venue_name',
                 'venues.slug as venue_slug',
                 'bands.name as band_name',
                 'bands.slug as band_slug',
                 'bands.slug as sender_slug',
                 'bands.name as sender_name',
+                'band_messages.timeslot_id',
+                'timeslots.headliner as isHeadliner',
                 'timeslots.start_time as timeslot_date',
                 'timeslots.pending as timeslot_pending',
                 'timeslots.accepted as timeslot_accepted',
@@ -108,14 +112,17 @@ router.get('/', function(req, res) {
                     'venue_messages.user_id',
                     'venue_messages.band_id',
                     'venue_messages.venue_id',
-                    'venue_messages.timeslot_id',
                     'venue_messages.date_created',
+                    'venues.profile_image as venue_image',
+                    'bands.profile_image as band_image',
                     'venues.name as venue_name',
                     'venues.slug as venue_slug',
                     'bands.name as band_name',
                     'bands.slug as band_slug',
                     'venues.slug as sender_slug',
                     'venues.name as sender_name',
+                    'venue_messages.timeslot_id',
+                    'timeslots.headliner as isHeadliner',
                     'timeslots.start_time as timeslot_date',
                     'timeslots.pending as timeslot_pending',
                     'timeslots.accepted as timeslot_accepted',
@@ -138,14 +145,17 @@ router.get('/', function(req, res) {
                 'band_messages.user_id',
                 'band_messages.band_id',
                 'band_messages.venue_id',
-                'band_messages.timeslot_id',
                 'band_messages.date_created',
+                'venues.profile_image as venue_image',
+                'bands.profile_image as band_image',
                 'venues.name as venue_name',
                 'venues.slug as venue_slug',
                 'bands.name as band_name',
                 'bands.slug as band_slug',
                 'bands.slug as sender_slug',
                 'bands.name as sender_name',
+                'band_messages.timeslot_id',
+                'timeslots.headliner as isHeadliner',
                 'timeslots.start_time as timeslot_date',
                 'timeslots.pending as timeslot_pending',
                 'timeslots.accepted as timeslot_accepted',
@@ -157,14 +167,17 @@ router.get('/', function(req, res) {
                     'venue_messages.user_id',
                     'venue_messages.band_id',
                     'venue_messages.venue_id',
-                    'venue_messages.timeslot_id',
                     'venue_messages.date_created',
+                    'venues.profile_image as venue_image',
+                    'bands.profile_image as band_image',
                     'venues.name as venue_name',
                     'venues.slug as venue_slug',
                     'bands.name as band_name',
                     'bands.slug as band_slug',
                     'venues.slug as sender_slug',
                     'venues.name as sender_name',
+                    'venue_messages.timeslot_id',
+                    'timeslots.headliner as isHeadliner',
                     'timeslots.start_time as timeslot_date',
                     'timeslots.pending as timeslot_pending',
                     'timeslots.accepted as timeslot_accepted',
@@ -179,13 +192,10 @@ router.get('/', function(req, res) {
 });
 
 
-router.get('/bands/:id', function(req, res) {
-    //all messages for band
-});
+router.post('/', function(req, res) {
+    var userId = req.user.id;
 
-
-router.get('/venues/:id', function(req, res) {
-    //all messages for venue
+    
 });
 
 

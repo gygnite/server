@@ -67,7 +67,45 @@ router.post('/', function(req, res) {
 
 
 
+router.get('/:id', function(req, res) {
+    var user = req.user;
 
+    // FIXME: Check timeslot authentication
+    //check if user has authentication to view and access booking
+
+
+    Timeslot.fetchById(req.params.id)
+        .then(function(timeslot) {
+            Timeslot.findRelatedTimelots(timeslot).then(function(related) {
+                res.json({
+                    success: true,
+                    timeslots: related
+                });
+            });
+        }).catch(function(err) {
+            console.error("ERROR!", err);
+        });
+});
+
+
+router.put('/:vid/:bid', function(req, res) {
+    var bandId = req.params.bid;
+    var venueId = req.params.vid;
+    var status = req.body.status;
+    var date = req.body.date;
+    console.log("body", req.body)
+    if (status === 'accepted' || status === 'rejected') {
+        Timeslot.updateAcceptedRejected(status, venueId, bandId, date)
+        .then(function(updated) {
+            res.json({
+                timeslot: updated
+            });
+        }).catch(function(err) {
+            // FIXME: Error for update timeslot
+            console.error('ERR', err);
+        });
+    }
+});
 
 
 

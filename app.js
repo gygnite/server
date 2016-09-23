@@ -18,6 +18,10 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 
+io.on('connection', function(socket) {
+    console.log("socket connected...");
+});
+
 app.use(function(req, res, next) {
     res.throwClientError = function(message) {
         var error = new ClientError(message);
@@ -42,10 +46,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-// app.use(function(req, res, next) {
-//     res.redisClient = redisClient;
-//     next();
-// });
 
 
 
@@ -67,10 +67,6 @@ app.use('/api',
         secret: process.env.JWT_SECRET
     }), routes.api);
 
-
-io.on('connection', function(socket) {
-    console.log("socket connected...");
-});
 
 
 /** Unauthorized JWT Error */
@@ -110,10 +106,6 @@ server.listen(port, function() {
 });
 
 
-
-function apiMiddleware(req, res, next) {
-
-}
 
 
 module.exports = app;

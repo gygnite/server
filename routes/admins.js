@@ -6,6 +6,7 @@ const Promise = require('bluebird');
 const Band = require('../db/Band.model');
 const Venue = require('../db/Venue.model');
 const Admin = require('../db/Admin.model');
+const Genre = require('../db/Genre.model');
 
 router.get('/', function(req, res, next) {
     /*
@@ -58,8 +59,6 @@ router.get('/bands', function(req, res) {
 
 //create new band
 router.post('/bands', function(req, res) {
-    console.log("here???")
-    // console.log("req", req);
     var user = req.user;
     var inputtedBand = req.body;
     var cityState = getCityStateFromLocation(req.body.location);
@@ -67,6 +66,7 @@ router.post('/bands', function(req, res) {
     var influences = req.body.influences || [];
     var gear_needed = req.body.gear_needed || [];
     var gear_owned = req.body.gear_owned || [];
+    var genres = req.body.genres || [];
 
     var newBand = assign({}, inputtedBand, {
         city: cityState.city,
@@ -79,17 +79,20 @@ router.post('/bands', function(req, res) {
         gear_owned: gear_owned.join(', ').replace(/(\])/g, '').replace(/(\[)/g, '')
     });
     delete newBand.location;
+    delete newBand.genres;
 
     //validate inputs
     Band.validate(newBand)
     .then(create)
     .then(addAdminToBand)
+    .then(addGenresToBand)
     .then(function(createdBand) {
         res.status(200).json({
             created: true,
             data: {
                 band: createdBand[0],
-                admin: createdBand[1]
+                admin: createdBand[1],
+                // genres: createdBand[2]
             }
         });
     })
@@ -112,6 +115,17 @@ router.post('/bands', function(req, res) {
             Admin.addAdminToBand(band.id, user.id)
         );
         // return Admin.addAdminToBand(band.id, user.id);
+    }
+
+    function addGenresToBand(data) {
+        var band = data[0];
+        var admin = data[1];
+
+        return Promise.join(
+            band,
+            admin,
+            Genre.addGenresToBand(genres, band.id)
+        );
     }
 });
 

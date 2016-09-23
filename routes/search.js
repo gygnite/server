@@ -28,8 +28,8 @@ router.get('/bands', function(req, res) {
             var genres = '%%';
 
             if (req.query.q) {
-                query = req.query.q.toLowerCase().replace(/(\W)/g, ' ').split(' ').join('|');
-                query = '%('+query+')%';
+                // query = req.query.q.toLowerCase().replace(/(\W)/g, ' ').split(' ').join('|');
+                query = '%('+req.query.q+')%';
                 // ?q={:name, :bio, :city, :state, :influences}
             }
 
@@ -44,20 +44,23 @@ router.get('/bands', function(req, res) {
                 genres = '%('+genres.join('|')+')%';
             }
 
-            console.log("!req.query.q && !req.query.genre", req.query.genre)
             if (!req.query.q && !req.query.genre) {
+                console.log("!req.query.q && !req.query.genre", req.query.q, req.query.genre)
                 return res.json({
                     bands: []
                 });
             }
 
+            console.log("query", query);
+            console.log("genres", genres);
 
 
             knex('bands')
-                .select('bands.id', 'genres.genre')
-                .innerJoin('genres','genres.band_id', '=', 'bands.id')
-                .whereRaw('LOWER(genres.genre) SIMILAR TO ?', genres)
+                .select('bands.id')
+                // .innerJoin('genres','genres.band_id', '=', 'bands.id')
+                // .whereRaw('LOWER(genres.genre) SIMILAR TO ?', genres)
                 .then(function(ids) {
+                    console.log("ids", ids);
                     ids = ids.map(function(id) {
                         return id.id;
                     });
@@ -97,6 +100,7 @@ router.get('/bands', function(req, res) {
                     bands = sortBandsByGenrePrevalence(req.query.genre, bands)
                 }
 
+                // FIXME: Change setex redis back to 1800
                 redisClient.setex(fullQuery, 1800, JSON.stringify(bands));
 
                 res.json({
@@ -140,6 +144,7 @@ router.get('/bands', function(req, res) {
 
 
 router.get('/venues', function(req, res) {
+    var fullQuery = req.query.nw_lat+req.query.nw_lng+req.query.se_lat+req.query.se_lng;
     var coordinates = {
         nw: {
             lat: req.query.nw_lat,
@@ -150,13 +155,25 @@ router.get('/venues', function(req, res) {
             lng: req.query.se_lng
         }
     };
-    knex('venues')
-        .whereBetween('lat', [coordinates.se.lat, coordinates.nw.lat])
-        .whereBetween('lng', [coordinates.se.lng, coordinates.nw.lng])
-    .then(function(venues) {
-        res.json({
-            venues: venues
-        });
+
+    redisClient.get(fullQuery, function(err, reply) {
+        if (!err && reply) {
+            return res.json({
+                venues: JSON.parse(reply)
+            });
+        } else {
+            knex('venues')
+                .whereBetween('lat', [coordinates.se.lat, coordinates.nw.lat])
+                .whereBetween('lng', [coordinates.se.lng, coordinates.nw.lng])
+            .then(function(venues) {
+
+                redisClient.setex(fullQuery, 1800, JSON.stringify(venues));
+
+                res.json({
+                    venues: venues
+                });
+            });
+        }
     });
 });
 
