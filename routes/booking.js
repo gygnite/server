@@ -4,7 +4,7 @@ const router = require('express').Router();
 const Promise = require('bluebird');
 const Message = require('../db/Message.model');
 const Timeslot = require('../db/Timeslots.model');
-
+const knex = require('../db/knex');
 
 
 
@@ -66,8 +66,50 @@ router.post('/', function(req, res) {
 });
 
 
+router.get('/venue/:slug', function(req, res) {
+    var user = req.user;
 
-router.get('/:id', function(req, res) {
+    knex('venues').where({slug: req.params.slug})
+        .first('*')
+        .then(function(venue) {
+            return Promise.join(
+                venue,
+                knex('timeslots')
+                    .where({venue_id: venue.id})
+                    .join('bands', 'bands.id', '=', 'timeslots.band_id')
+                    .orderBy('start_time', 'desc')
+            );
+        }).then(function(data) {
+            res.json({
+                venue: data[0],
+                timeslots: data[1]
+            });
+        });
+
+    // knex('venues').where({slug: req.params.slug})
+    //     .join('timeslots', 'venues.id', '=', 'timeslots.venue_id')
+    //     .then(function(timeslots) {
+    //         console.log("timeslots", timeslots);
+    //         res.json({
+    //             timeslots: timeslots
+    //         });
+    //     });
+
+    // Timeslot.fetchBySlug(req.params.slug)
+    //     .then(function(timeslot) {
+    //         Timeslot.findRelatedTimelots(timeslot).then(function(related) {
+    //             res.json({
+    //                 success: true,
+    //                 timeslots: related
+    //             });
+    //         });
+    //     }).catch(function(err) {
+    //         console.error("ERROR!", err);
+    //     });
+});
+
+
+router.get('/date/:id', function(req, res) {
     var user = req.user;
 
     // FIXME: Check timeslot authentication

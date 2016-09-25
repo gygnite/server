@@ -15,13 +15,13 @@ router.get('/', function(req, res) {
         var venues = data[0].map(function(v, i) {
             return Promise.join(
                 {id: v.id, slug: v.slug, type: 'venue', name: v.name},
-                findVenueMessages(v.id)
+                Message.findVenueMessages(v.id)
             );
         });
         var bands = data[1].map(function(b, i) {
             return Promise.join(
                 {id: b.id, slug: b.slug, type: 'band', name: b.name},
-                findBandMessages(b.id)
+                Message.findBandMessages(b.id)
             );
         });
 
@@ -35,6 +35,7 @@ router.get('/', function(req, res) {
         var groups = venuesAndBands.map(function(v, i) {
             var identity = v[0];
             var allMsgs = v[1];
+            var hasUnread = false;
             var msgGroups = {};
             allMsgs.forEach(function(msg) {
                 //check type of id,
@@ -49,17 +50,23 @@ router.get('/', function(req, res) {
                             type: type,
                             slug: msg[type+'_slug'],
                             name: msg[type+'_name'],
-                            image: msg[type+'_image']
+                            image: msg[type+'_image'],
+                            id: msg[type+'_id']
                         },
-                        messages: []
+                        messages: [],
+                        hasUnread: false
                     };
                 }
-                console.log("msg[type+'_slug']: ", msg[identity.type+'_slug'], identity.slug)
+                if (!msg.date_read) {
+                    msgGroups[msg[type+'_slug']].hasUnread = true;
+                    hasUnread = true;
+                }
                 msgGroups[msg[type+'_slug']].messages.push(msg);
             });
             return {
                 identity: identity,
-                messageGroups: msgGroups
+                messageGroups: msgGroups,
+                hasUnread: hasUnread
             }
         });
 
@@ -77,125 +84,41 @@ router.get('/', function(req, res) {
         });
     });
 
-
-
-
-    function findVenueMessages(id) {
-        return knex('band_messages').where('band_messages.venue_id', id)
-            .join('venues', 'venues.id', '=', 'band_messages.venue_id')
-            .join('bands', 'bands.id', '=', 'band_messages.band_id')
-            .fullOuterJoin('timeslots', 'timeslots.id', '=', 'band_messages.timeslot_id')
-            .select([
-                'band_messages.content as content',
-                'band_messages.user_id',
-                'band_messages.band_id',
-                'band_messages.venue_id',
-                'band_messages.date_created',
-                'venues.profile_image as venue_image',
-                'bands.profile_image as band_image',
-                'venues.name as venue_name',
-                'venues.slug as venue_slug',
-                'bands.name as band_name',
-                'bands.slug as band_slug',
-                'bands.slug as sender_slug',
-                'bands.name as sender_name',
-                'band_messages.timeslot_id',
-                'timeslots.headliner as isHeadliner',
-                'timeslots.start_time as timeslot_date',
-                'timeslots.pending as timeslot_pending',
-                'timeslots.accepted as timeslot_accepted',
-                'timeslots.rejected as timeslot_rejected'
-            ])
-            .unionAll(function() {
-                this.select([
-                    'venue_messages.content as content',
-                    'venue_messages.user_id',
-                    'venue_messages.band_id',
-                    'venue_messages.venue_id',
-                    'venue_messages.date_created',
-                    'venues.profile_image as venue_image',
-                    'bands.profile_image as band_image',
-                    'venues.name as venue_name',
-                    'venues.slug as venue_slug',
-                    'bands.name as band_name',
-                    'bands.slug as band_slug',
-                    'venues.slug as sender_slug',
-                    'venues.name as sender_name',
-                    'venue_messages.timeslot_id',
-                    'timeslots.headliner as isHeadliner',
-                    'timeslots.start_time as timeslot_date',
-                    'timeslots.pending as timeslot_pending',
-                    'timeslots.accepted as timeslot_accepted',
-                    'timeslots.rejected as timeslot_rejected'
-                ]).from('venue_messages')
-                .where('venue_messages.venue_id', id)
-                .join('venues', 'venues.id', '=', 'venue_messages.venue_id')
-                .join('bands', 'bands.id', '=', 'venue_messages.band_id')
-                .fullOuterJoin('timeslots', 'timeslots.id', '=', 'venue_messages.timeslot_id')
-            }).orderBy('date_created', 'asc')
-    }
-
-    function findBandMessages(id) {
-        return knex('band_messages').where('band_messages.band_id', id)
-            .join('venues', 'venues.id', '=', 'band_messages.venue_id')
-            .join('bands', 'bands.id', '=', 'band_messages.band_id')
-            .fullOuterJoin('timeslots', 'timeslots.id', '=', 'band_messages.timeslot_id')
-            .select([
-                'band_messages.content as content',
-                'band_messages.user_id',
-                'band_messages.band_id',
-                'band_messages.venue_id',
-                'band_messages.date_created',
-                'venues.profile_image as venue_image',
-                'bands.profile_image as band_image',
-                'venues.name as venue_name',
-                'venues.slug as venue_slug',
-                'bands.name as band_name',
-                'bands.slug as band_slug',
-                'bands.slug as sender_slug',
-                'bands.name as sender_name',
-                'band_messages.timeslot_id',
-                'timeslots.headliner as isHeadliner',
-                'timeslots.start_time as timeslot_date',
-                'timeslots.pending as timeslot_pending',
-                'timeslots.accepted as timeslot_accepted',
-                'timeslots.rejected as timeslot_rejected'
-            ])
-            .union(function() {
-                this.select([
-                    'venue_messages.content as content',
-                    'venue_messages.user_id',
-                    'venue_messages.band_id',
-                    'venue_messages.venue_id',
-                    'venue_messages.date_created',
-                    'venues.profile_image as venue_image',
-                    'bands.profile_image as band_image',
-                    'venues.name as venue_name',
-                    'venues.slug as venue_slug',
-                    'bands.name as band_name',
-                    'bands.slug as band_slug',
-                    'venues.slug as sender_slug',
-                    'venues.name as sender_name',
-                    'venue_messages.timeslot_id',
-                    'timeslots.headliner as isHeadliner',
-                    'timeslots.start_time as timeslot_date',
-                    'timeslots.pending as timeslot_pending',
-                    'timeslots.accepted as timeslot_accepted',
-                    'timeslots.rejected as timeslot_rejected'
-                ]).from('venue_messages')
-                .where('venue_messages.band_id', id)
-                .join('venues', 'venues.id', '=', 'venue_messages.venue_id')
-                .join('bands', 'bands.id', '=', 'venue_messages.band_id')
-                .fullOuterJoin('timeslots', 'timeslots.id', '=', 'venue_messages.timeslot_id');
-            }).orderBy('date_created', 'asc');
-    }
 });
 
 
-router.post('/', function(req, res) {
-    var userId = req.user.id;
 
-    
+
+
+router.post('/', function(req, res) {
+    var type = req.body.type;
+
+    if (type === 'bands') {
+        var band_id = req.body.sender_id;
+        var venue_id = req.body.receiver_id;
+    } else {
+        var venue_id = req.body.sender_id;
+        var band_id = req.body.receiver_id;
+    }
+
+    var message = {
+        user_id: req.user.id,
+        content: req.body.content,
+        band_id: band_id,
+        venue_id: venue_id
+    };
+
+
+    Message.createNew(message, type)
+        .then(function(msg) {
+            return Message.findOneWithData(msg.id, type);
+        }).then(function(msg) {
+            res.json({
+                message: msg
+            });
+        }).catch(function(err) {
+            console.error(err);
+        });
 });
 
 
