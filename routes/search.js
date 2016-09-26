@@ -3,7 +3,12 @@ const knex = require('../db/knex');
 const Promise = require('bluebird');
 const url = require('url');
 const redis = require('redis');
-const redisClient = redis.createClient();
+
+if (process.env.CLUSTER_URL) {
+    const redisClient = redis.createClient(process.env.CLUSTER_URL);
+} else {
+    const redisClient = redis.createClient();
+}
 
 
 /**
