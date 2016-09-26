@@ -4,11 +4,11 @@ const Promise = require('bluebird');
 const url = require('url');
 const redis = require('redis');
 
-if (process.env.CLUSTER_URL) {
-    const redisClient = redis.createClient(process.env.CLUSTER_URL);
-} else {
+// if (process.env.CLUSTER_URL) {
+//     const redisClient = redis.createClient(process.env.CLUSTER_URL);
+// } else {
     const redisClient = redis.createClient();
-}
+// }
 
 
 /**
