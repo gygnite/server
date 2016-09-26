@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha"
+    "test": "NODE_ENV=test mocha",
+    "start": "knex migrate:latest && node app.js"
   },
   "repository": {
     "type": "git",
@@ -31,8 +32,6 @@
     "joi": "^9.0.4",
     "jsonwebtoken": "^7.1.9",
     "knex": "^0.11.10",
-    "mongodb": "^2.2.8",
-    "mongoose": "^4.5.10",
     "morgan": "^1.7.0",
     "pg": "^6.1.0",
     "querystring": "^0.2.0",
