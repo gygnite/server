@@ -55,3 +55,79 @@ Error
     at tryOnImmediate (timers.js:550:5)
     at processImmediate [as _immediateCallback] (timers.js:529:5)
 insert into "genres" ("band_id", "genre") values ($1, $2) returning * - invalid input syntax for integer: "{"id":3,"name":"New Awesome Band","slug":"imhlg5a6fo","bio":null,"profile_image":"/assets/band_avatar.png","year_established":null,"city":"Fort Collins","state":"CO","google_place_id":"ChIJrTDwkEVKaYcRgkCrtChCsak","lat":"40.5852602","lng":"-105.08442300000002","gear_owned":"","gear_needed":"","avg_set_length":null,"influences":"","website_url":null,"soundcloud_url":null,"facebook_url":null,"bandcamp_url":null,"myspace_url":null,"updated_at":"2016-09-22T16:29:09.916Z","created_at":"2016-09-22T16:29:09.916Z","deleted_at":null}"
+Sun Sep 25 2016 19:30:25 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : GET : /admins : {"id":1,"email":"gygnite@mailinator.com","first_name":"Michael","last_name":"Hottman","activation_code":"KlZIS4dZdA52RnPoXfsGttrSbkXAXlQ5","created_at":"2016-09-08T04:49:09.056Z","deleted_at":null,"iat":1473310161}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:33:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:75:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+ReferenceError: fetchByBandIdWithData is not defined
+Sun Sep 25 2016 19:57:02 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : GET : /admins : {"id":1,"email":"gygnite@mailinator.com","first_name":"Michael","last_name":"Hottman","activation_code":"KlZIS4dZdA52RnPoXfsGttrSbkXAXlQ5","created_at":"2016-09-08T04:49:09.056Z","deleted_at":null,"iat":1473310161}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:33:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:79:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+TypeError: Cannot read property 'fetchByVenueIdWithData' of undefined
+Sun Sep 25 2016 19:57:03 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : GET : /admins : {"id":1,"email":"gygnite@mailinator.com","first_name":"Michael","last_name":"Hottman","activation_code":"KlZIS4dZdA52RnPoXfsGttrSbkXAXlQ5","created_at":"2016-09-08T04:49:09.056Z","deleted_at":null,"iat":1473310161}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:33:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:79:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+TypeError: Cannot read property 'fetchByVenueIdWithData' of undefined
+Sun Sep 25 2016 20:05:28 GMT-0600 (MDT)-----
+	LogError
+/routes/admins : GET : /admins : {"id":1,"email":"gygnite@mailinator.com","first_name":"Michael","last_name":"Hottman","activation_code":"KlZIS4dZdA52RnPoXfsGttrSbkXAXlQ5","created_at":"2016-09-08T04:49:09.056Z","deleted_at":null,"iat":1473310161}
+Error
+    at new LogError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/errors/Error.js:33:19)
+    at ServerResponse.res.logError (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/app.js:33:21)
+    at /Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/routes/admins.js:84:17
+    at tryCatcher (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/util.js:16:23)
+    at Promise._settlePromiseFromHandler (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:509:31)
+    at Promise._settlePromise (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:566:18)
+    at Promise._settlePromise0 (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:611:10)
+    at Promise._settlePromises (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/promise.js:686:18)
+    at Async._drainQueue (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:138:16)
+    at Async._drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:148:10)
+    at Immediate.Async.drainQueues (/Users/Hottman/Development/galvanize/q4/FINAL/gygnite/server/node_modules/bluebird/js/release/async.js:17:14)
+    at runCallback (timers.js:570:20)
+    at tryOnImmediate (timers.js:550:5)
+    at processImmediate [as _immediateCallback] (timers.js:529:5)
+TypeError: ent.forEach is not a function

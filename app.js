@@ -1,16 +1,17 @@
 'use strict';
 require('dotenv').config();
 const express = require('express'),
-    app = express(),
-    cors = require('cors'),
-    logger = require('morgan'),
-    bodyParser = require('body-parser'),
-    expressJWT = require('express-jwt'),
+    app         = express(),
+    cors        = require('cors'),
+    logger      = require('morgan'),
+    bodyParser  = require('body-parser'),
+    expressJWT  = require('express-jwt'),
     ClientError = require('./errors/Error').ClientError,
     ServerError = require('./errors/Error').ServerError,
-    LogError = require('./errors/Error').LogError,
-    server = require('http').Server(app),
-    io = require('socket.io')(server);
+    LogError    = require('./errors/Error').LogError,
+    server      = require('http').Server(app),
+    io          = require('socket.io')(server),
+    socketioJwt = require("socketio-jwt");
 const port = process.env.PORT || 4000;
 
 
@@ -18,9 +19,6 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 
-io.on('connection', function(socket) {
-    console.log("socket connected...");
-});
 
 app.use(function(req, res, next) {
     res.throwClientError = function(message) {
@@ -48,7 +46,6 @@ app.use(function(req, res, next) {
 
 
 
-
 var routes = {
     auth: require('./routes/auth'),
     api: require('./routes/api'),
@@ -58,6 +55,30 @@ var routes = {
 };
 
 
+var socketConnections = [];
+
+io.use(socketioJwt.authorize({
+  secret: process.env.JWT_SECRET,
+  handshake: true
+}));
+
+io.on('connection', function(socket) {
+    // console.log("***");
+    // socket.join(socket.decoded_token.id);
+    // console.log("socket", socket);
+    // console.log("***");
+
+    socket.on('connectToRoom', function(data) {
+        socket.join(data.user);
+    });
+});
+
+// io.on('disconnect', function(socket) {
+//     socketConnections.splice(socketConnection.indexOf(socket), 1);
+// });
+
+
+
 app.use('/auth', routes.auth);
 app.use('/search', routes.search);
 app.use('/bands', routes.bands);
@@ -65,7 +86,7 @@ app.use('/venues', routes.venues);
 app.use('/api',
     expressJWT({
         secret: process.env.JWT_SECRET
-    }), routes.api);
+    }), routes.api(io));
 
 
 

@@ -6,7 +6,6 @@ const knex = require('./knex');
 function BandAdmins() {
     return knex('band_admins');
 }
-
 function VenueAdmins() {
     return knex('venue_admins');
 }
@@ -70,7 +69,37 @@ function findAllVenuesByAdmin(id) {
 
 
 
+function findAdminsBySlug(slug) {
+    return new Promise(function(resolve, reject) {
+        Promise.join(
+            knex('bands').where({slug: slug}).first('id'),
+            knex('venues').where({slug: slug}).first('id')
+        ).then(function(bAndV) {
+            var bandId = bAndV[0];
+            var venueId = bAndV[1];
+            var type = (bandId) ? 'band' : 'venue';
+            if (!bandId && !venueId) {
+                resolve({
+                    admins: []
+                });
+            } else {
+                var id = (bandId) ? bandId.id : venueId.id;
+                knex(type+'_admins').where(type+'_id', id)
+                .then(function(ids) {
+                    ids = ids.map(function(id) {
+                        console.log("id", id);
+                        return id.user_id;
+                    });
+                    console.log("ids sending to!", ids);
+                    resolve({
+                        admins: ids
+                    });
+                }).catch(reject);
+            }
 
+        }).catch(reject);
+    });
+}
 
 
 
@@ -78,5 +107,6 @@ module.exports = {
     addAdminToBand: addAdminToBand,
     addAdminToVenue: addAdminToVenue,
     findAllBandsByAdmin: findAllBandsByAdmin,
-    findAllVenuesByAdmin: findAllVenuesByAdmin
+    findAllVenuesByAdmin: findAllVenuesByAdmin,
+    findAdminsBySlug: findAdminsBySlug
 };
