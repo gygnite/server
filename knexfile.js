@@ -7,7 +7,7 @@ module.exports = {
         connection: 'postgresql://localhost/gygnite'
     },
 
-    'test': {
+    test: {
         client: 'pg',
         connection: 'postgresql://localhost/gygnite-test'
     },

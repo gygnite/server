@@ -5,7 +5,8 @@
   "main": "express.js",
   "scripts": {
     "test": "NODE_ENV=test mocha",
-    "start": "./node_modules/.bin/knex migrate:latest && node express.js"
+    "prestart": "NODE_ENV=production node ./node_modules/knex/lib/bin/cli.js migrate:latest",
+    "start": "node express.js"
   },
   "repository": {
     "type": "git",
