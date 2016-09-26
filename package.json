@@ -2,10 +2,10 @@
   "name": "gygnite_server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "express.js",
   "scripts": {
     "test": "NODE_ENV=test mocha",
-    "start": "./node_modules/.bin/knex migrate:latest && node app.js"
+    "start": "./node_modules/.bin/knex migrate:latest && node express.js"
   },
   "repository": {
     "type": "git",
