@@ -4,12 +4,16 @@ const Promise = require('bluebird');
 const url = require('url');
 const redis = require('redis');
 
-// if (process.env.CLUSTER_URL) {
-//     const redisClient = redis.createClient(process.env.CLUSTER_URL);
-// } else {
-    const redisClient = redis.createClient();
-// }
+// // if (process.env.CLUSTER_URL) {
+// //     const redisClient = redis.createClient(process.env.CLUSTER_URL);
+// // } else {
+//     const redisClient = redis.createClient();
+// // }
 
+const redisClient = redis.createClient(process.env.REDIS_URL);
+
+
+// console.log("redisClient", redisClient)
 
 /**
 * Searches and sorts bands based on input queries
@@ -24,6 +28,7 @@ router.get('/bands', function(req, res) {
     var fullQuery = url.parse(req.url).query;
 
     redisClient.get(fullQuery, function(err, reply) {
+        console.log("getting bands!", err, reply);
         if (!err && reply) {
             return res.json({
                 bands: JSON.parse(reply)
