@@ -4,6 +4,7 @@ const Promise = require('bluebird');
 const url = require('url');
 const redis = require('redis');
 
+
 // // if (process.env.CLUSTER_URL) {
 // //     const redisClient = redis.createClient(process.env.CLUSTER_URL);
 // // } else {
@@ -28,7 +29,6 @@ router.get('/bands', function(req, res) {
     var fullQuery = url.parse(req.url).query;
 
     // redisClient.get(fullQuery, function(err, reply) {
-    //     console.log("getting bands!", err, reply);
     //     if (!err && reply) {
     //         return res.json({
     //             bands: JSON.parse(reply)
@@ -60,10 +60,6 @@ router.get('/bands', function(req, res) {
                     bands: []
                 });
             }
-
-            // console.log("query", query);
-            // console.log("genres", genres);
-
 
             knex('bands')
                 .select('bands.id')
@@ -104,7 +100,6 @@ router.get('/bands', function(req, res) {
                 })
             .then(function(bands) {
 
-                // console.log("bands found...", bands);
 
                 if (req.query.genre) {
                     bands = sortBandsByGenrePrevalence(req.query.genre, bands)
@@ -119,8 +114,8 @@ router.get('/bands', function(req, res) {
             }).catch(function(err) {
                 console.log("err!", err);
             });
-        }
-    });
+    //     }
+    // });
 
     function sortBandsByGenrePrevalence(genres, bands) {
         return bands.sort(function(a, b) {
@@ -166,12 +161,12 @@ router.get('/venues', function(req, res) {
         }
     };
 
-    redisClient.get(fullQuery, function(err, reply) {
-        if (!err && reply) {
-            return res.json({
-                venues: JSON.parse(reply)
-            });
-        } else {
+    // redisClient.get(fullQuery, function(err, reply) {
+    //     if (!err && reply) {
+    //         return res.json({
+    //             venues: JSON.parse(reply)
+    //         });
+    //     } else {
             knex('venues')
                 .whereBetween('lat', [coordinates.se.lat, coordinates.nw.lat])
                 .whereBetween('lng', [coordinates.se.lng, coordinates.nw.lng])
@@ -183,8 +178,8 @@ router.get('/venues', function(req, res) {
                     venues: venues
                 });
             });
-        }
-    });
+    //     }
+    // });
 });
 
 

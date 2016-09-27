@@ -12,7 +12,7 @@ function addGenresToBand(genres, bandId) {
     return new Promise(function(resolve, reject) {
         var all = genres.map(function(g, i) {
             return Genres().insert({
-                genre: genres,
+                genre: g,
                 band_id: bandId
             }).returning('*');
         });

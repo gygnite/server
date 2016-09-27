@@ -38,6 +38,17 @@ function create(venue) {
     });
 }
 
+function updateImage(id, image_url) {
+    return new Promise(function(resolve, reject) {
+        Venues().where({id: id}).update({
+            profile_image: image_url
+        }).returning('*')
+        .then(function(venue) {
+            resolve(venue[0]);
+        }).catch(reject);
+    });
+}
+
 function update(slug, venue) {
     return new Promise(function(resolve, reject) {
         venue = updateCreatedAt(venue);
@@ -53,7 +64,6 @@ function softDelete(slug) {
     return new Promise(function(resolve, reject) {
         Venues().where({slug: slug}).first('*').then(function(venueToUpdate) {
             venueToUpdate = updateDeletedAt(venueToUpdate);
-            console.log("venueToUpdate", venueToUpdate)
             return Venues().where({id: venueToUpdate.id}).update(venueToUpdate, '*');
         }).then(function(deleted) {
             resolve(deleted[0]);
@@ -138,6 +148,7 @@ function createSlug() {
 module.exports = {
     validate: validate,
     create: create,
+    updateImage: updateImage,
     update: update,
     softDelete: softDelete,
     findOneBySlug: findOneBySlug,

@@ -16,7 +16,6 @@ module.exports = function(io) {
 
     io.on('connection', function(socket) {
         socket.on('notification', function(data) {
-            console.log("notification data!", data)
             Admin.findAdminsBySlug(data.slug_to_notify)
                 .then(function(users) {
                     users.admins.forEach(function(user) {
@@ -46,8 +45,6 @@ module.exports = function(io) {
             Admin.findAllBandsByAdmin(user.id),
             Admin.findAllVenuesByAdmin(user.id)
         ).then(function(adminData) {
-
-            console.log("admindata", adminData[0])
 
             bands = adminData[0];
             venues = adminData[1];
@@ -110,7 +107,6 @@ module.exports = function(io) {
         var notificationId = req.body.notification;
         Notifs.setNotificationAsRead(notificationId)
             .then(function(notif) {
-                console.log("set as read", notif);
                 res.json({
                     notification: notif
                 });
@@ -127,12 +123,10 @@ module.exports = function(io) {
 
         Admin.findAdminsBySlug(req.body.slug_to_notify)
         .then(function(users) {
-            console.log("users?", users);
             return Promise.all(users.admins.map(function(user) {
                 return Notifs.create(user, type, text)
             }));
         }).then(function(notifs) {
-            console.log("notifs created", notifs);
             res.json({
                 notifs: notifs
             });
@@ -164,7 +158,6 @@ module.exports = function(io) {
                 });
             })
             .catch(function(err) {
-                console.log("err?", err);
                 res.throwClientError('Unable to fetch bands, please try again.');
                 res.logError('/routes/admins', 'GET', '/admins/bands', JSON.stringify(req.user), err.message);
             });
@@ -218,7 +211,6 @@ module.exports = function(io) {
         function create(band) {
             // FIXME:0 Add band name to slug
             //add band name slug to
-            console.log("inputtedBand: ", inputtedBand)
             return Band.create(band, inputtedBand);
         }
 
@@ -240,6 +232,20 @@ module.exports = function(io) {
                 Genre.addGenresToBand(genres, band.id)
             );
         }
+    });
+
+
+    router.post('/bands/image', function(req, res) {
+        var image = req.body.image_url;
+        var id = req.body.id;
+        Band.updateImage(id, image)
+        .then(function(band) {
+            res.json({
+                band: band
+            });
+        }).catch(function(err) {
+            res.throwClientError('Unable to upload band image.');
+        });
     });
 
     router.get('/bands/:slug', function(req, res) {
@@ -314,7 +320,6 @@ module.exports = function(io) {
     router.post('/venues', function(req, res) {
         var user = req.user;
         var inputtedVenue = req.body;
-        console.log("req.body: ", inputtedVenue)
 
         var address = inputtedVenue.location.label.substring(0, inputtedVenue.location.label.indexOf(','));
         var city_state = inputtedVenue.location.label.substring(inputtedVenue.location.label.indexOf(',') + 2, inputtedVenue.location.label.lastIndexOf(','));
@@ -358,6 +363,19 @@ module.exports = function(io) {
         }
     });
 
+    router.post('/venues/image', function(req, res) {
+        var image = req.body.image_url;
+        var id = req.body.id;
+        Venue.updateImage(id, image)
+        .then(function(band) {
+            res.json({
+                venue: venue
+            });
+        }).catch(function(err) {
+            res.throwClientError('Unable to upload venue image.');
+        });
+    });
+
     router.get('/venues/:slug', function(req, res) {
         Venue.findOneBySlug(req.params.slug)
         .then(function(venue) {
@@ -387,7 +405,6 @@ module.exports = function(io) {
     });
 
     router.delete('/venues/:slug', function(req, res) {
-        console.log("SLUG!", req.params.slug)
 
         Venue.softDelete(req.params.slug)
             .then(function(deleted) {
@@ -414,7 +431,6 @@ module.exports = function(io) {
 
 
 function getCityStateFromLocation(location) {
-    console.log("location: ", location);
     var city = location.label.substring(0, location.label.indexOf(','));
     var state = location.label.substring(location.label.indexOf(',') + 2, location.label.lastIndexOf(','));
     return {
