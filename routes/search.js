@@ -10,7 +10,7 @@ const redis = require('redis');
 //     const redisClient = redis.createClient();
 // // }
 
-const redisClient = redis.createClient(process.env.REDIS_URL);
+// const redisClient = redis.createClient(process.env.REDIS_URL);
 
 
 // console.log("redisClient", redisClient)
@@ -27,13 +27,13 @@ router.get('/bands', function(req, res) {
 
     var fullQuery = url.parse(req.url).query;
 
-    redisClient.get(fullQuery, function(err, reply) {
-        console.log("getting bands!", err, reply);
-        if (!err && reply) {
-            return res.json({
-                bands: JSON.parse(reply)
-            });
-        } else {
+    // redisClient.get(fullQuery, function(err, reply) {
+    //     console.log("getting bands!", err, reply);
+    //     if (!err && reply) {
+    //         return res.json({
+    //             bands: JSON.parse(reply)
+    //         });
+    //     } else {
             var query = '%%';
             var genres = '%%';
 
@@ -61,14 +61,14 @@ router.get('/bands', function(req, res) {
                 });
             }
 
-            console.log("query", query);
-            console.log("genres", genres);
+            // console.log("query", query);
+            // console.log("genres", genres);
 
 
             knex('bands')
                 .select('bands.id')
-                // .innerJoin('genres','genres.band_id', '=', 'bands.id')
-                // .whereRaw('LOWER(genres.genre) SIMILAR TO ?', genres)
+                .innerJoin('genres','genres.band_id', '=', 'bands.id')
+                .whereRaw('LOWER(genres.genre) SIMILAR TO ?', genres)
                 .then(function(ids) {
                     console.log("ids", ids);
                     ids = ids.map(function(id) {
