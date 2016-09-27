@@ -7,8 +7,8 @@
     "test": "NODE_ENV=test mocha",
     "start": "node express.js",
     "migrate": "knex migrate:latest",
-    "rollback": "node ./node_modules/knex/lib/bin/cli.js migrate:rollback",
-    "poststart": "NODE_ENV=production npm run rollback && npm run migrate"
+    "rollback": "knex migrate:rollback",
+    "resetdb": "npm run rollback && npm run migrate"
   },
   "repository": {
     "type": "git",

@@ -13,5 +13,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTable('band_messages');
+    return knex.schema.dropTable('venue_messages');
 };
