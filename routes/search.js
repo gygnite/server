@@ -10,7 +10,7 @@ const redis = require('redis');
 //     const redisClient = redis.createClient();
 // // }
 
-const redisClient = redis.createClient(process.env.REDIS_URL);
+// const redisClient = redis.createClient(process.env.REDIS_URL);
 
 
 // console.log("redisClient", redisClient)
@@ -27,13 +27,13 @@ router.get('/bands', function(req, res) {
 
     var fullQuery = url.parse(req.url).query;
 
-    redisClient.get(fullQuery, function(err, reply) {
-        console.log("getting bands!", err, reply);
-        if (!err && reply) {
-            return res.json({
-                bands: JSON.parse(reply)
-            });
-        } else {
+    // redisClient.get(fullQuery, function(err, reply) {
+    //     console.log("getting bands!", err, reply);
+    //     if (!err && reply) {
+    //         return res.json({
+    //             bands: JSON.parse(reply)
+    //         });
+    //     } else {
             var query = '%%';
             var genres = '%%';
 
@@ -111,7 +111,7 @@ router.get('/bands', function(req, res) {
                 }
 
                 // FIXME: Change setex redis back to 1800
-                redisClient.setex(fullQuery, 1800, JSON.stringify(bands));
+                // redisClient.setex(fullQuery, 1800, JSON.stringify(bands));
 
                 res.json({
                     bands: bands
@@ -119,8 +119,8 @@ router.get('/bands', function(req, res) {
             }).catch(function(err) {
                 console.log("err!", err);
             });
-        }
-    });
+        // }
+    // });
 
     function sortBandsByGenrePrevalence(genres, bands) {
         return bands.sort(function(a, b) {
@@ -166,25 +166,25 @@ router.get('/venues', function(req, res) {
         }
     };
 
-    redisClient.get(fullQuery, function(err, reply) {
-        if (!err && reply) {
-            return res.json({
-                venues: JSON.parse(reply)
-            });
-        } else {
+    // redisClient.get(fullQuery, function(err, reply) {
+    //     if (!err && reply) {
+    //         return res.json({
+    //             venues: JSON.parse(reply)
+    //         });
+    //     } else {
             knex('venues')
                 .whereBetween('lat', [coordinates.se.lat, coordinates.nw.lat])
                 .whereBetween('lng', [coordinates.se.lng, coordinates.nw.lng])
             .then(function(venues) {
 
-                redisClient.setex(fullQuery, 1800, JSON.stringify(venues));
+                // redisClient.setex(fullQuery, 1800, JSON.stringify(venues));
 
                 res.json({
                     venues: venues
                 });
             });
-        }
-    });
+        // }
+    // });
 });
 
 
