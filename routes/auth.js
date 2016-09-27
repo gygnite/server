@@ -84,6 +84,7 @@ router.post('/login', function(req, res) {
 
 
 router.post('/signup', function(req, res) {
+    
     var inputtedUser = req.body;
     Joi.validate(req.body, signupSchema, validateUser);
 
