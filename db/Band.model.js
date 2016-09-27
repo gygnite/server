@@ -41,6 +41,17 @@ function create(band, request) {
     });
 }
 
+function updateImage(id, image_url) {
+    return new Promise(function(resolve, reject) {
+        Bands().where({id: id}).update({
+            profile_image: image_url
+        }).returning('*')
+        .then(function(band) {
+            resolve(band[0]);
+        }).catch(reject);
+    });
+}
+
 function update(slug, band) {
     return new Promise(function(resolve, reject) {
 
@@ -146,6 +157,7 @@ function createSlug() {
 module.exports = {
     validate: validate,
     create: create,
+    updateImage: updateImage,
     update: update,
     softDelete: softDelete,
     findOneBySlug: findOneBySlug,

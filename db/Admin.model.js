@@ -87,10 +87,8 @@ function findAdminsBySlug(slug) {
                 knex(type+'_admins').where(type+'_id', id)
                 .then(function(ids) {
                     ids = ids.map(function(id) {
-                        console.log("id", id);
                         return id.user_id;
                     });
-                    console.log("ids sending to!", ids);
                     resolve({
                         admins: ids
                     });
