@@ -90,13 +90,7 @@ module.exports = function(io) {
                 data: groups
             });
         }).catch(function(err) {
-            // FIXME: Unable to fetch messages
-            console.error('unable to fetch messages: ', err);
-            res.json({
-                success: false,
-                data: {},
-                message: 'Unable to fetch messages'
-            });
+            res.throwClientError('Unable to load messages.');
         });
 
     });
@@ -132,7 +126,7 @@ module.exports = function(io) {
                     message: msg
                 });
             }).catch(function(err) {
-                console.error(err);
+                res.throwClientError('An error occurred while sending message.');
             });
     });
 

@@ -52,7 +52,6 @@ router.get('/bands', function(req, res) {
             }
 
             if (!req.query.q && !req.query.genre) {
-                console.log("!req.query.q && !req.query.genre", req.query.q, req.query.genre)
                 return res.json({
                     bands: []
                 });
@@ -63,7 +62,6 @@ router.get('/bands', function(req, res) {
                 .innerJoin('genres','genres.band_id', '=', 'bands.id')
                 .whereRaw('LOWER(genres.genre) SIMILAR TO ?', genres)
                 .then(function(ids) {
-                    console.log("ids", ids);
                     ids = ids.map(function(id) {
                         return id.id;
                     });
@@ -97,7 +95,6 @@ router.get('/bands', function(req, res) {
                 })
             .then(function(bands) {
 
-                // console.log("bands found...", bands);
 
                 if (req.query.genre) {
                     bands = sortBandsByGenrePrevalence(req.query.genre, bands)
@@ -110,7 +107,7 @@ router.get('/bands', function(req, res) {
                     bands: bands
                 });
             }).catch(function(err) {
-                console.log("err!", err);
+                res.throwClientError('An error occurred while searching bands.');
             });
     //     }
     // });
@@ -140,10 +137,6 @@ router.get('/bands', function(req, res) {
     }
 });
 
-
-// router.get('/search/genres/unique', function(req, res) {
-//     // knex('genres', where)
-// });
 
 
 router.get('/venues', function(req, res) {
