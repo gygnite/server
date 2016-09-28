@@ -97,7 +97,7 @@ module.exports = function(io) {
                     notifications: notifs
                 });
             }).catch(function(err) {
-                console.log("err", err);
+                res.throwClientError('Error loading notifications.');
             });
     });
 
@@ -111,7 +111,7 @@ module.exports = function(io) {
                     notification: notif
                 });
             }).catch(function(err) {
-                console.log("err", err);
+                res.throwClientError('Error updating notification.');
             });
     });
 
@@ -131,8 +131,7 @@ module.exports = function(io) {
                 notifs: notifs
             });
         }).catch(function(err) {
-            //error creating notif
-            console.error("error creating notif", err);
+            res.throwClientError('Error creating notification.');
         });
 
     });

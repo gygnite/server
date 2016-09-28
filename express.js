@@ -63,20 +63,10 @@ io.use(socketioJwt.authorize({
 }));
 
 io.on('connection', function(socket) {
-    // console.log("***");
-    // socket.join(socket.decoded_token.id);
-    // console.log("socket", socket);
-    // console.log("***");
-
     socket.on('connectToRoom', function(data) {
         socket.join(data.user);
     });
 });
-
-// io.on('disconnect', function(socket) {
-//     socketConnections.splice(socketConnection.indexOf(socket), 1);
-// });
-
 
 
 app.use('/auth', routes.auth);
@@ -92,7 +82,6 @@ app.use('/api',
 
 /** Unauthorized JWT Error */
 app.use(function(err, req, res, next) {
-    console.log("err!", err)
     if (err.status === 401) {
         res.status(401).json({
             message: 'Invalid Token or Unauthorized',
@@ -116,7 +105,6 @@ app.use(function(err, req, res, next) {
             error: true,
             message: 'An error has occured. Please try again.'
         });
-        console.log("err", err);
     }
 });
 

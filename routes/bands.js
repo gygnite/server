@@ -4,13 +4,8 @@ const router = require('express').Router();
 const Bands = require('../db/Band.model');
 
 /**
-    All Bands
+    All Bands (user doesn't need to be authenticated)
 */
-router.get('/', function(req,res) {
-    //fetch from users table all records with user id
-    //map through
-});
-
 
 router.get('/:slug', function(req, res) {
     Bands.findOneBySlugWithEvents(req.params.slug)
@@ -22,7 +17,7 @@ router.get('/:slug', function(req, res) {
                 band: returnBand
             });
         }).catch(function(err) {
-            console.log("err", err);
+            res.throwClientError('Unable to load band.');
         });
 });
 

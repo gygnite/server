@@ -76,7 +76,7 @@ router.post('/login', function(req, res) {
                 }
             });
         }).catch(function() {
-            return errors.authorization.invalidCredentials(res);
+            res.throwClientError('Invalid email or password.');
         });
     }
 
@@ -90,19 +90,17 @@ router.post('/signup', function(req, res) {
 
     function validateUser(err, value) {
         if (err) {
-            return errors.authorization.invalidCredentials(res);
+            res.throwClientError('Invalid email or password.');
         } else {
             User.exists(inputtedUser.email)
             .then(function(userExists) {
                 if (!userExists) {
                     signupUser();
                 } else {
-                    return errors.authorization.invalidCredentials(res, {
-                        message: 'Account already exists, please log in.'
-                    });
+                    res.throwClientError('Account already exists, please log in.');
                 }
             }).catch(function(err) {
-                return errors.database.generalDatabaseError(res);
+                res.throwClientError('An error occured while signing up, please try again.');
             });
         }
     }
@@ -110,7 +108,7 @@ router.post('/signup', function(req, res) {
     function signupUser() {
         bcrypt.hash(inputtedUser.password, 10, function(err, hash) {
             if (err) {
-                return errors.database.generalDatabaseError(res);
+                res.throwClientError('An error occured while signing up.');
             } else {
                 User.create({
                     first_name: inputtedUser.first_name,
@@ -125,6 +123,8 @@ router.post('/signup', function(req, res) {
                         success: true,
                         message: 'Account created'
                     });
+                }).catch(function(err) {
+                    res.throwClientError('An error occured while signing up, please try again.');
                 });
             }
         });

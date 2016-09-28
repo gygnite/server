@@ -13,9 +13,6 @@ router.post('/', function(req, res) {
     var userId = req.user.id;
     var details = req.body;
 
-    console.log("req.query!", req.query);
-    console.log("body!", req.body);
-
     var sender = req.query.sender;
     var receiver = req.query.receiver;
     var originType = req.query.originType;
@@ -25,7 +22,6 @@ router.post('/', function(req, res) {
     .then(getMessageDetails)
     .then(function(data) {
 
-        console.log("data!", data);
         //created successfully!
         res.status(200).json({
             timeslot: data[0],
@@ -34,13 +30,7 @@ router.post('/', function(req, res) {
         });
 
     }).catch(function(err) {
-        console.log("err!", err);
-        //unsuccessful
-        // FIXME: Unsuccessful timestamp creation
-        res.json({
-            success: false,
-            err: err
-        });
+        res.throwClientError('An error occurred while saving booking.');
     });
 
 
@@ -53,13 +43,10 @@ router.post('/', function(req, res) {
         if (originType === 'bands') {
             message.band_id = sender,
             message.venue_id = receiver
-        } else if (originType === 'venues') {
+        } else {
             message.venue_id = sender,
             message.band_id = receiver
-        } else {
-            //error!
         }
-
 
         return Promise.join(
             timeslot,
@@ -69,7 +56,6 @@ router.post('/', function(req, res) {
 
 
     function getMessageDetails(data) {
-        //created successfully!
         var timeslot = data[0];
         var message = data[1];
         var type = originType.substring(0, originType.length - 1);
@@ -93,8 +79,6 @@ router.get('/', function(req, res) {
         Admin.findAllBandsByAdmin(user.id),
         Admin.findAllVenuesByAdmin(user.id)
     ).then(function(adminData) {
-        console.log("admindata", adminData[0])
-
         bands = adminData[0];
         venues = adminData[1];
 
@@ -173,13 +157,14 @@ router.get('/', function(req, res) {
             bands: bandIds,
             venues: venueIds
         });
+    }).catch(function(err) {
+        res.throwClientError('Unable to load bookings.');
     });
 });
 
 
 router.get('/venue/:slug', function(req, res) {
     var user = req.user;
-
     knex('venues').where({slug: req.params.slug})
         .first('*')
         .then(function(venue) {
@@ -195,6 +180,8 @@ router.get('/venue/:slug', function(req, res) {
                 venue: data[0],
                 timeslots: data[1]
             });
+        }).catch(function(err) {
+            res.throwClientError('An error occurred while loading venue bookings.');
         });
 });
 
@@ -205,7 +192,6 @@ router.get('/date/:id', function(req, res) {
     // FIXME: Check timeslot authentication
     //check if user has authentication to view and access booking
 
-
     Timeslots.fetchById(req.params.id)
         .then(function(timeslot) {
             Timeslots.findRelatedTimelots(timeslot).then(function(related) {
@@ -215,7 +201,7 @@ router.get('/date/:id', function(req, res) {
                 });
             });
         }).catch(function(err) {
-            console.error("ERROR!", err);
+            res.throwClientError('Unable to load booking.');
         });
 });
 
@@ -233,8 +219,7 @@ router.put('/:vid/:bid', function(req, res) {
                 timeslot: updated
             });
         }).catch(function(err) {
-            // FIXME: Error for update timeslot
-            console.error('ERR', err);
+            res.throwClientError('An error occurred while updating booking.');
         });
     }
 });
